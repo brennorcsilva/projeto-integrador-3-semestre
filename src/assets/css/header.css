@@ -1,0 +1,66 @@
+header{
+    padding: var(--espacamento);
+    background-color: var(--cor-fundo);
+}
+
+header nav, header nav ul{
+    display: flex;
+    align-items: center;
+}
+
+header nav{
+    justify-content: space-between;
+}
+
+header nav ul{
+    column-gap: 2rem;
+}
+
+header nav ul li{
+    color: var(--cor-texto);
+    position: relative;
+
+    font-size: 1.1rem;
+    text-shadow: rgba(255, 255, 255, 0.5) 0px 6px 6px;
+}
+
+/*Animação hover dos elementos da navbar*/
+header nav ul li::before{
+    content: '';
+    width: 0;
+    height: 3px;
+
+    bottom: 0;
+    position: absolute;
+    background-color: var(--cor-texto);
+    transition: all ease-in-out .5s;
+}
+
+header nav ul li:last-child::before{
+    content: '';
+    background-color: unset;
+    height: 0;
+}
+
+header nav ul li:hover{
+    cursor: pointer;
+}
+
+header nav ul li:hover::before{
+    width: 100%;
+}
+
+header nav img{
+    width: 100%;
+    max-width: 17rem;
+    height: auto;
+}
+
+.img-usuario{
+    width: 2.1rem;
+    height: auto;
+}
+
+.cookies{
+    position: absolute;  
+}

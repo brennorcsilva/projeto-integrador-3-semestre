@@ -1,0 +1,15 @@
+/* Arquivo de padronização global do projeto */
+*{
+    box-sizing: border-box;
+}
+
+/*Criação de Variáveis para utilização posterior */
+:root{
+    --espacamento: 1rem 3rem;
+    --cor-fundo: #D33741;
+    --cor-fundo-azul: #345688;
+    --cor-texto: #FFF;
+    --tamanho-titulo: clamp(1rem, 8vw, 2.5rem);
+    --tamanho-texto: clamp(.5rem, 3vw, 1.2rem);
+    --spacing-modal: 80%;
+}
