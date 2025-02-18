@@ -6,6 +6,11 @@ const LocaisDoacao = () =>{
     //Pegando o valor digitado no input
     const [ posicao, setPosicao ] = useState('')
 
+    //Função para pesquisar uma posição específica e atualizar no Mapa
+    const handleClick = () =>{
+        console.log(`A mensagem escrita é: ${ posicao }`)
+    }
+
     return(
         <section className="locais-doacao flex items-start justify-evenly">
             <div className="container-texto flex align-center justify-center flex-col gap-y-6">
@@ -15,7 +20,7 @@ const LocaisDoacao = () =>{
 
             <div className="container-img w-full max-w-xs flex align-center justify-center flex-col relative gap-y-2">
                 <img src={ imgMap } alt="mapa" className="w-full"/>
-                <input type="text" name="posicao" id="posicao" placeholder="Digite algo..." onChange={ (e) =>setPosicao(e.target.value) } className="input-posicao"/><span className="span-pesquisar"></span>
+                <input type="text" name="posicao" id="posicao" placeholder="Digite algo..." onChange={ (e) =>setPosicao(e.target.value) } className="input-posicao"/><span className="span-pesquisar" onClick={ handleClick }></span>
             </div>
         </section>
     )
