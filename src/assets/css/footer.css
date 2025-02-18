@@ -1,0 +1,40 @@
+footer{
+    padding: var(--espacamento);
+    background-color: var(--cor-fundo);
+
+    color: var(--cor-texto);
+}
+
+footer li{
+    list-style: none;
+}
+
+.container-doe, .container-sobre, .container-contato, .container-redes{
+    display: flex;
+    flex-direction: column;
+}
+
+.container-direitos, .container-politicas{
+    display: flex;
+}
+
+.container-direitos{
+    grid-column-start: 1;
+    grid-column-end: 6;
+    justify-content: space-between;
+    border-top: 1px solid #CCC;
+}
+
+.container-politicas{
+    column-gap: 1.5rem;
+}
+
+.container-redes ul{
+    column-gap: 1rem;
+}
+
+.container-redes ul li a img{
+    width: 100%;
+    max-width: 2.25rem;
+    height: auto;
+}

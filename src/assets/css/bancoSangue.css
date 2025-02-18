@@ -1,0 +1,68 @@
+.banco-sangue{
+    background-color: rgba(52, 86, 136, .7);
+    margin-top: var(--espacamento-margin);
+    padding: var(--espacamento);
+}
+
+.banco-sangue .container{
+    margin: 2rem auto 0 auto;
+    column-gap: 4rem;
+}
+
+.sangue{
+    width: 6.25rem;
+    height: 6.25rem;
+    background-color: #FFF;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+}
+
+.sangue::after{
+    content: '';
+    position: absolute;
+    width: 6.25rem;
+    height: 6rem;
+    bottom: 0;
+    border-radius: 30% 30% 50% 50%;
+    background-color: var(--cor-sangue);
+    animation: sangue 1s forwards;
+    transform: translateY(100px);
+
+}
+
+
+/*Tipo sanguíneo A+/Todos*/
+.sangue::before{
+    content: '';
+    position: absolute;
+    width: 6.25rem;
+    height: 4rem;
+    background-image: url('../img/teste-img.svg');
+    background-size: cover;
+    z-index: 2;
+    transform: rotate(22deg) translateY(100px);
+    animation: sangue 1s forwards;
+}
+
+/*Tipo Sanguíneo A-*/
+.container-sangue:nth-child(2) .sangue::before{
+    transform: rotate(0) translateY(1px);
+    height: 9rem;
+}
+
+/*Tipo Sanguíneo B-/AB-/O-*/
+.container-sangue:nth-child(4) .sangue::before, .container-sangue:nth-child(6) .sangue::before, .container-sangue:nth-child(8) .sangue::before{
+    transform: rotate(15deg) translateY(-2px);
+    height: 6rem;
+}
+
+@keyframes sangue{
+    0%{
+        background-color: #FFF;
+    }100%{
+        background-color: var(--cor-sangue);
+        transform: rotate(22deg) translateY(-14px);
+        transform: translateY(0);
+    }
+}

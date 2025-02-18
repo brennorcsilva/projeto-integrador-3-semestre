@@ -7,8 +7,10 @@
 :root{
     --espacamento: 1rem 3rem;
     --cor-fundo: #D33741;
+    --cor-sangue: #BB2029;
     --cor-fundo-azul: #345688;
     --cor-texto: #FFF;
+    --espacamento-margin: 4rem;
     --tamanho-titulo: clamp(1rem, 8vw, 2.5rem);
     --tamanho-texto: clamp(.5rem, 3vw, 1.2rem);
     --spacing-modal: 80%;

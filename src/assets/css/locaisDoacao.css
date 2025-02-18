@@ -1,6 +1,7 @@
 .locais-doacao{
     background-color: var(--cor-fundo-azul);
     padding: 2rem 3rem;
+    margin-top: var(--espacamento-margin);
 }
 
 .texto-doacao{

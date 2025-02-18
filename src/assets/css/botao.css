@@ -1,0 +1,11 @@
+.botao{
+    padding: .5rem 2rem;
+    border-radius: 25px;
+    margin-top: 2rem;
+    transition: all ease-in-out .5s;
+}
+
+.botao:hover{
+    cursor: pointer;
+    transform: translateY(-10px) scale(1.1);
+}
