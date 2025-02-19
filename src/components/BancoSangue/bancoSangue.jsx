@@ -8,9 +8,8 @@ const BancoSangue = () =>{
     //Função para renderizar tardiamente o componente(tipo um lazy load bem gambiarra)
     const handleScroll = () =>{
         const scrollY = window.scrollY;
-        console.log(scrollY)
 
-        if(scrollY > 350) return setIsActive(true)
+        if(scrollY > 120) return setIsActive(true)
     }
 
     useEffect(() =>{

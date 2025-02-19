@@ -57,8 +57,16 @@
 }
 
 .container:last-child{
-    margin: 2rem 0;
+    margin: 2rem auto;
     padding-top: 2rem;
+}
+
+.container:last-child .container-sangue{
+    row-gap: .5rem;
+}
+
+.container:last-child h1{
+    font-size: 1.5rem;
 }
 
 @keyframes sangue{
