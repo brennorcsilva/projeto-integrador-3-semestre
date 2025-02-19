@@ -8,8 +8,9 @@ const BancoSangue = () =>{
     //Função para renderizar tardiamente o componente(tipo um lazy load bem gambiarra)
     const handleScroll = () =>{
         const scrollY = window.scrollY;
+        console.log(scrollY)
 
-        if(scrollY > 102) return setIsActive(true)
+        if(scrollY > 350) return setIsActive(true)
     }
 
     useEffect(() =>{
@@ -62,6 +63,24 @@ const BancoSangue = () =>{
                         <div className="sangue"></div>
                         <h1 className="text-white text-(length:--tamanho-titulo) font-bold">O-</h1>
                     </div>
+                </div>
+
+                <div className="container border-t-2 border-[#284F60] flex justify-center items-center">
+                    <div className="container-sangue flex flex-col justify-center items-center">
+                        <div className="sangue"></div>
+                        <h1 className="text-white text-(length: --tamanho-titulo) font-bold">Estável</h1>
+                    </div>
+
+                    <div className="container-sangue flex flex-col justify-center items-center">
+                        <div className="sangue"></div>
+                        <h1 className="text-white text-(length: --tamanho-titulo) font-bold">Alerta</h1>
+                    </div>
+
+                    <div className="container-sangue flex flex-col justify-center items-center">
+                        <div className="sangue"></div>
+                        <h1 className="text-white text-(length: --tamanho-titulo) font-bold">Crítico</h1>
+                    </div>
+
                 </div>
             </section>
 

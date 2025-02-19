@@ -6,7 +6,7 @@ import twitter from '../../assets/img/twitter.svg'
 
 const Footer = () =>{
     return(
-        <footer className="grid grid-cols-4 grid-rows-2 justify-center align-center">
+        <footer className="grid grid-cols-4 justify-center align-center">
             <div className="container-doe">
                 <h1 className="text-lg font-semibold">Doe Sangue</h1>
                 <ul>

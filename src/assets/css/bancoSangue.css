@@ -5,7 +5,7 @@
 }
 
 .banco-sangue .container{
-    margin: 2rem auto 0 auto;
+    margin: 4rem auto 0 auto;
     column-gap: 4rem;
 }
 
@@ -28,12 +28,11 @@
     background-color: var(--cor-sangue);
     animation: sangue 1s forwards;
     transform: translateY(100px);
-
 }
 
 
 /*Tipo sanguíneo A+/Todos*/
-.sangue::before{
+.sangue::before, .container:last-child .container-sangue:nth-child(1) .sangue::before{
     content: '';
     position: absolute;
     width: 6.25rem;
@@ -46,15 +45,20 @@
 }
 
 /*Tipo Sanguíneo A-*/
-.container-sangue:nth-child(2) .sangue::before{
+.container-sangue:nth-child(2) .sangue::before, .container:last-child .container-sangue:nth-child(3) .sangue::before{
     transform: rotate(0) translateY(1px);
     height: 9rem;
 }
 
 /*Tipo Sanguíneo B-/AB-/O-*/
-.container-sangue:nth-child(4) .sangue::before, .container-sangue:nth-child(6) .sangue::before, .container-sangue:nth-child(8) .sangue::before{
+.container-sangue:nth-child(4) .sangue::before, .container-sangue:nth-child(6) .sangue::before, .container-sangue:nth-child(8) .sangue::before, .container:last-child .container-sangue:nth-child(2) .sangue::before{
     transform: rotate(15deg) translateY(-2px);
     height: 6rem;
+}
+
+.container:last-child{
+    margin: 2rem 0;
+    padding-top: 2rem;
 }
 
 @keyframes sangue{
