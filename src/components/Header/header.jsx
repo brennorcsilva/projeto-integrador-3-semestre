@@ -36,8 +36,8 @@ const Header = () =>{
                         </AlertDialogDescription>
                         </AlertDialogHeader>
                         <AlertDialogFooter>
-                        <AlertDialogCancel>Recusar</AlertDialogCancel>
-                        <AlertDialogAction onClick={ () => setIsOpen(true) }>Aceitar</AlertDialogAction>
+                        <AlertDialogCancel className="hover:cursor-pointer">Recusar</AlertDialogCancel>
+                        <AlertDialogAction onClick={ () => setIsOpen(true) } className="hover:cursor-pointer">Aceitar</AlertDialogAction>
                         </AlertDialogFooter>
                     </AlertDialogContent>
                 </AlertDialog>
