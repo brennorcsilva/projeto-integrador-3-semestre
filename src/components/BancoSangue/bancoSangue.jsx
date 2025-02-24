@@ -64,20 +64,20 @@ const BancoSangue = () =>{
                     </div>
                 </div>
 
-                <div className="container border-t-2 border-[#284F60] flex justify-center items-center">
+                <div className="container border-t-2 border-[#284F60] flex justify-center items-center flex-wrap">
                     <div className="container-sangue flex flex-col justify-center items-center">
                         <div className="sangue"></div>
-                        <h1 className="text-white text-(length: --tamanho-titulo) font-bold">Estável</h1>
+                        <h1 className="text-white font-bold">Estável</h1>
                     </div>
 
                     <div className="container-sangue flex flex-col justify-center items-center">
                         <div className="sangue"></div>
-                        <h1 className="text-white text-(length: --tamanho-titulo) font-bold">Alerta</h1>
+                        <h1 className="text-white font-bold">Alerta</h1>
                     </div>
 
                     <div className="container-sangue flex flex-col justify-center items-center">
                         <div className="sangue"></div>
-                        <h1 className="text-white text-(length: --tamanho-titulo) font-bold">Crítico</h1>
+                        <h1 className="text-white font-bold">Crítico</h1>
                     </div>
 
                 </div>

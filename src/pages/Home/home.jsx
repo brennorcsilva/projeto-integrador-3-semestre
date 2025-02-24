@@ -2,6 +2,7 @@ import Header from '../../components/Header/header'
 import BannerCarousel from '../../components/BannerCarousel/bannerCarousel';
 import LocaisDoacao from '../../components/LocaisDoacao/locaisDoacao';
 import BancoSangue from '../../components/BancoSangue/bancoSangue'
+import CarouselAvaliacoes from '../../components/CarouselAvaliacoes/carouselAvaliacoes';
 import Footer from '../../components/Footer/footer'
 import { motion } from 'framer-motion'
 
@@ -16,6 +17,7 @@ const Home = () =>{
             <BannerCarousel/>
             <LocaisDoacao/>
             <BancoSangue/>
+            <CarouselAvaliacoes/>
             <Footer/>
     </motion.div>)
 }
