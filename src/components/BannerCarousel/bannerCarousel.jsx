@@ -13,7 +13,7 @@ const BannerCarousel = () =>{
                 <CarouselItem key={index} className="basis-3/3">
                 <div className="p-1">
                     <Card>
-                    <CardContent className="w-full flex aspect-square items-center justify-center p-6 h-80">
+                    <CardContent className="w-full flex aspect-square items-center justify-center p-6 h-95">
                         <span className="text-4xl font-semibold">{index + 1}</span>
                     </CardContent>
                     </Card>

@@ -64,6 +64,7 @@ const CarouselAvaliacoes = () =>{
                         <p className="text-(length:--tamanho-texto) max-w-[80%]">Eu fui um dos primeiros a utilizar o CONEXSP. Realizei uma doação de plaquetas. A agilidade em comparação com outros sistemas é realmente gritante!</p>
                     </div>
                 </div>
+<<<<<<< HEAD
 
                 <div className="container-avaliacao flex justify-center gap-x-[2rem]">
                     <img src={ imgAvaliacao} alt="imagem de usuario avaliacao"/>
@@ -95,6 +96,42 @@ const CarouselAvaliacoes = () =>{
                         <h1 className="text-(length:--tamanho-titulo) font-bold">Douglas Vieira dos Santos, 27 anos</h1>
                         <p className="text-(length:--tamanho-texto) max-w-[80%]">Eu fui um dos primeiros a utilizar o CONEXSP. Realizei uma doação de plaquetas. A agilidade em comparação com outros sistemas é realmente gritante!</p>
                     </div>
+=======
+            </div>
+            <div className="container-avaliacao flex justify-center gap-x-[2rem]">
+                <img src={ imgAvaliacao} alt="imagem de usuario avaliacao"/>
+                <div className="container-texto flex flex-col gap-y-[.5rem]">
+                    <h1 className="text-(length:--tamanho-titulo) font-bold">Douglas Vieira dos Santos, 27 anos</h1>
+                    <p className="text-(length:--tamanho-texto) max-w-[80%]">Eu fui um dos primeiros a utilizar o CONEXSP. Realizei uma doação de plaquetas. A agilidade em comparação com outros sistemas é realmente gritante!</p>
+                </div>
+            </div>
+            <div className="container-avaliacao flex justify-center gap-x-[2rem]">
+                <img src={ imgAvaliacao} alt="imagem de usuario avaliacao"/>
+                <div className="container-texto flex flex-col gap-y-[.5rem]">
+                    <h1 className="text-(length:--tamanho-titulo) font-bold">Douglas Vieira dos Santos, 27 anos</h1>
+                    <p className="text-(length:--tamanho-texto) max-w-[80%]">Eu fui um dos primeiros a utilizar o CONEXSP. Realizei uma doação de plaquetas. A agilidade em comparação com outros sistemas é realmente gritante!</p>
+                </div>
+            </div>
+            <div className="container-avaliacao flex justify-center gap-x-[2rem]">
+                <img src={ imgAvaliacao} alt="imagem de usuario avaliacao"/>
+                <div className="container-texto flex flex-col gap-y-[.5rem]">
+                    <h1 className="text-(length:--tamanho-titulo) font-bold">Douglas Vieira dos Santos, 27 anos</h1>
+                    <p className="text-(length:--tamanho-texto) max-w-[80%]">Eu fui um dos primeiros a utilizar o CONEXSP. Realizei uma doação de plaquetas. A agilidade em comparação com outros sistemas é realmente gritante!</p>
+                </div>
+            </div>
+            <div className="container-avaliacao flex justify-center gap-x-[2rem]">
+                <img src={ imgAvaliacao} alt="imagem de usuario avaliacao"/>
+                <div className="container-texto flex flex-col gap-y-[.5rem]">
+                    <h1 className="text-(length:--tamanho-titulo) font-bold">Douglas Vieira dos Santos, 27 anos</h1>
+                    <p className="text-(length:--tamanho-texto) max-w-[80%]">Eu fui um dos primeiros a utilizar o CONEXSP. Realizei uma doação de plaquetas. A agilidade em comparação com outros sistemas é realmente gritante!</p>
+                </div>
+            </div>
+            <div className="container-avaliacao flex justify-center gap-x-[2rem]">
+                <img src={ imgAvaliacao} alt="imagem de usuario avaliacao"/>
+                <div className="container-texto flex flex-col gap-y-[.5rem]">
+                    <h1 className="text-(length:--tamanho-titulo) font-bold">Douglas Vieira dos Santos, 27 anos</h1>
+                    <p className="text-(length:--tamanho-texto) max-w-[80%]">Eu fui um dos primeiros a utilizar o CONEXSP. Realizei uma doação de plaquetas. A agilidade em comparação com outros sistemas é realmente gritante!</p>
+>>>>>>> 9bf72a0 (Fiz a parte de responsividade do Header; Adicionei algumas imagens a pasta img, mas o ideal seria montarmos nossos próprios banners; E tentei mexer na responsividade do Carrossel de avaliações, mas ficou totalmente quebrado, e aí reverti as alterações.)
                 </div>
             </Carousel>
 

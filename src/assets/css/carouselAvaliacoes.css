@@ -6,6 +6,11 @@
     margin: 0 auto;
     width: 100%;
     max-width: 80rem;
+<<<<<<< HEAD
+=======
+    height: 22rem;
+    margin-bottom: 4rem;
+>>>>>>> 9bf72a0 (Fiz a parte de responsividade do Header; Adicionei algumas imagens a pasta img, mas o ideal seria montarmos nossos próprios banners; E tentei mexer na responsividade do Carrossel de avaliações, mas ficou totalmente quebrado, e aí reverti as alterações.)
 }
 
 .react-multi-carousel-dot--active button{
@@ -31,6 +36,14 @@
     justify-content: flex-end;
 }
 
+<<<<<<< HEAD
 .container-botao{
     padding: 0 2rem;
+=======
+@media (max-width: 1320px) {
+    /* ia mexer com a responsividade dessa parte, mas fiquei meio em dúvida de como fazer.*/
+    .react-multi-carousel-dot-list {
+        padding: 20;
+    }
+>>>>>>> 9bf72a0 (Fiz a parte de responsividade do Header; Adicionei algumas imagens a pasta img, mas o ideal seria montarmos nossos próprios banners; E tentei mexer na responsividade do Carrossel de avaliações, mas ficou totalmente quebrado, e aí reverti as alterações.)
 }
