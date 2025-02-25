@@ -1,8 +1,75 @@
 import '../../assets/css/locaisDoacao.css'
-import imgMap from '../../assets/img/google-maps.png'
-import { useState } from 'react'
+import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api'
+import { useState, useEffect } from 'react'
 
 const LocaisDoacao = () =>{
+
+    const [ userLocation, setUserLocation ] = useState(null)
+
+    //Funcao responsável por pegar a posicao atual do usuario
+    const getUserLocation = () =>{
+        //Se a geolocalizacao for suportada pelo navegador...
+        if(navigator.geolocation){
+            navigator.geolocation.getCurrentPosition(
+                (position) =>{
+                    const { latitude, longitude } = position.coords
+                    setUserLocation({ latitude, longitude })
+                },
+                //Se der erro enquanto pega a posicao...
+                (error) =>{
+                    alert("Erro ao pegar sua posição! Tente novamente")
+                }
+            );
+        }else{
+            alert("Seu navegador não suporta a nossa geolocalização! Por favor, digite manualmente ou tente novamente em outro navegador.")
+        }
+    }
+
+    //Chamando a função assim que a página for renderizada, para depois chamar o mapa e já setar a posição atual do usuario
+    useEffect(() =>{
+        getUserLocation()
+    }, [ userLocation ])
+    
+    //Função que gerará o mapa
+    const Mapa = () =>{
+        const { isLoaded } = useJsApiLoader({
+            id: 'google-map-script',
+            googleMapsApiKey: 'AIzaSyBnXNjIHW3VYkMxXpzzxAtyowU_GAxD3yk',
+          })
+
+        
+          const position = [{lat: -23.663359, lng:  -46.661627}, {lat: -23.666473, lng: -46.655793}, {lat: -23.661483, lng: -46.663155  }]
+          
+          const latlng = {  
+                lat: userLocation.latitude,
+                lng: userLocation.longitude
+            }
+
+          return(
+          <div className="mapa">
+            { isLoaded ? (
+            <GoogleMap
+            mapContainerStyle={{ width: '100%', height: '15rem', borderRadius: '30px'}}
+            center={ latlng }
+            zoom={12}
+            >
+                { position.map((posicao, i) =>(
+                    <Marker key={ i + 1 } position={ posicao } options={{
+                        label: {
+                            text: `Endereço ${ i + 1 }`,
+                            className: "mapa-marker",
+                        }
+                    }}/>
+                )) }
+
+            <></>
+            </GoogleMap>
+            ) : (<></>) }
+          </div>
+        )
+        
+    }
+
     //Pegando o valor digitado no input
     const [ posicao, setPosicao ] = useState('')
 
@@ -19,7 +86,7 @@ const LocaisDoacao = () =>{
             </div>
 
             <div className="container-img w-full max-w-xs flex align-center justify-center flex-col relative gap-y-2">
-                <img src={ imgMap } alt="mapa" className="w-full"/>
+                { userLocation  && (<Mapa/>)}
                 <input type="text" name="posicao" id="posicao" placeholder="Digite algo..." onChange={ (e) =>setPosicao(e.target.value) } className="input-posicao"/><span className="span-pesquisar" onClick={ handleClick }></span>
             </div>
         </section>

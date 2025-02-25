@@ -9,7 +9,7 @@ header nav, header nav ul{
 }
 
 header nav img {
-    z-index:40;
+    z-index: 40;
 }
 
 header nav{
@@ -17,7 +17,7 @@ header nav{
 }
 
 header nav ul{
-    column-gap: 4rem;
+    column-gap: 2rem;
 }
 
 .hamburguer {

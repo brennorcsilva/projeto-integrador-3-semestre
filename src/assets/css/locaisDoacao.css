@@ -37,3 +37,7 @@
 .span-pesquisar:hover{
     cursor: pointer;
 }
+
+.mapa-marker{
+    margin-top: -2rem;
+}
