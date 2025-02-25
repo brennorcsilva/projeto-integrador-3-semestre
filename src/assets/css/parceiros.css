@@ -1,0 +1,10 @@
+.parceiros{
+    border-top: 8px solid #284F60;
+    border-bottom: 8px solid #284F60;
+    margin: 0 0 2rem 0;
+}
+
+.img-parceiros{
+    max-width: 12.5rem;
+    max-height: 12.5rem;
+}

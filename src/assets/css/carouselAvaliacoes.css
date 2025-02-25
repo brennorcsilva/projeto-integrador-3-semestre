@@ -1,8 +1,11 @@
+.carousel-avaliacoes{
+    padding: var(--espacamento-padrao);
+}
+
 .react-multi-carousel-list{
     margin: 0 auto;
     width: 100%;
     max-width: 80rem;
-    height: 22rem;
 }
 
 .react-multi-carousel-dot--active button{
@@ -26,4 +29,8 @@
 
 .react-multi-carousel-dot-list{
     justify-content: flex-end;
+}
+
+.container-botao{
+    padding: 0 2rem;
 }

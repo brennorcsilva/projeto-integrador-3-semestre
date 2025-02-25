@@ -83,7 +83,9 @@ const BancoSangue = () =>{
                 </div>
             </section>
 
-            <Botao texto="Agendar Doação" cor="#D33741"/>
+            <div className="container-botao flex justify-center items-center">
+                <Botao texto="Agendar Doação"/>
+            </div>
             </>
         )
         
