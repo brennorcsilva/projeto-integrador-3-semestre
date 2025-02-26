@@ -28,13 +28,14 @@ const LocaisDoacao = () =>{
     //Chamando a função assim que a página for renderizada, para depois chamar o mapa e já setar a posição atual do usuario
     useEffect(() =>{
         getUserLocation()
-    }, [ userLocation ])
+    },)
     
     //Função que gerará o mapa
     const Mapa = () =>{
+        const apiKey = import.meta.env.VITE_API_KEY;
         const { isLoaded } = useJsApiLoader({
             id: 'google-map-script',
-            googleMapsApiKey: 'AIzaSyBnXNjIHW3VYkMxXpzzxAtyowU_GAxD3yk',
+            googleMapsApiKey: apiKey,
           })
 
         
@@ -49,7 +50,6 @@ const LocaisDoacao = () =>{
           <div className="mapa">
             { isLoaded ? (
             <GoogleMap
-            mapContainerStyle={{ width: '100%', height: '15rem', borderRadius: '30px'}}
             center={ latlng }
             zoom={12}
             >
