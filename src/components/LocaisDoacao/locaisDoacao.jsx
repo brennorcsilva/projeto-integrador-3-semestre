@@ -1,11 +1,14 @@
 import '../../assets/css/locaisDoacao.css'
-import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api'
-import React, { useState, useEffect } from 'react'
+import { GoogleMap, useJsApiLoader, StandaloneSearchBox, Marker } from '@react-google-maps/api'
+import { useState, useEffect, useRef } from 'react'
 import markerMaps from '../../assets/img/marker-maps.svg'
 
 const LocaisDoacao = () =>{
 
     const [ userLocation, setUserLocation ] = useState(null)
+
+    //Posicoes fixas de hospitais com banco de sangue
+    const [ position, setPosition ] = useState([{lat: -23.577814508225977, lng: -46.64783765636008 }, {lat: -23.54386904913557, lng: -46.64997646650208 }, {lat: -23.557763365740563, lng: -46.66997784908076 }, { lat: -23.599959457589836, lng: -46.71522022728726}, { lat: -23.568564477015144, lng: -46.64328039412957}])
 
     //Funcao responsável por pegar a posicao atual do usuario
     const getUserLocation = () =>{
@@ -32,18 +35,16 @@ const LocaisDoacao = () =>{
     useEffect(() =>{
         getUserLocation()
     }, [])
+
+    const apiKey = import.meta.env.VITE_API_KEY;
+    const { isLoaded } = useJsApiLoader({
+        id: 'google-map-script',
+        googleMapsApiKey: apiKey,
+        libraries: ['places']
+      })
     
     //Função que gerará o mapa
     const Mapa = () =>{
-        const apiKey = import.meta.env.VITE_API_KEY;
-        const { isLoaded } = useJsApiLoader({
-            id: 'google-map-script',
-            googleMapsApiKey: apiKey
-          })
-
-          //Posicoes fixas de hospitais com banco de sangue
-          
-          const position = [{ lat: -23.577814508225977, lng: -46.64783765636008 }, {lat: -23.54386904913557, lng: -46.64997646650208 }, {lat: -23.557763365740563, lng: -46.66997784908076 }, { lat: -23.599959457589836, lng: -46.71522022728726}, { lat: -23.568564477015144, lng: -46.64328039412957}]
 
           //Pegando a posicao atual do usuario e colocando no padrao aceito pela API
           const userLatLng = {  
@@ -54,40 +55,58 @@ const LocaisDoacao = () =>{
           return(
           <div className="mapa">
             { isLoaded ? (
-            <GoogleMap
-            center={ userLatLng }
-            zoom={12}
-            mapContainerStyle={{ width: '100%', height: '15rem', borderRadius: '30px'}}
-            >
+                <GoogleMap
+                center={ userLatLng }
+                zoom={12}
+                mapContainerStyle={{ width: '100%', height: '15rem', borderRadius: '30px'}}
+                >
 
-            {/*Exibindo para o usuário onde ele está*/  }
-            <Marker position = { userLatLng }/>
+                {/*Exibindo para o usuário onde ele está*/  }
+                <Marker position = { userLatLng }/>
 
-            {/*Exibindo no mapa a posição dos bancos de sangue*/}
-                { position.map((posicao, i) =>(
-                    <Marker key={ i + 1 } position={ posicao } icon={ markerMaps}/>
-                )) }
+                {/*Exibindo no mapa a posição dos bancos de sangue*/}
+                    { position.map((posicao, i) =>(
+                        <Marker key={ i + 1 } position={ posicao } icon={ markerMaps}/>
+                    )) }
 
-            <></>
-            </GoogleMap>
-            ) : (<></>) }
+                <></>
+                </GoogleMap>
+            ) : (<></>)}
           </div>
         )
         
     }
 
     //Função para pesquisar uma posição específica e atualizar no Mapa
-    const handleClick = (txt) =>{
-        console.log(`A mensagem é: ${ txt }`)
+    const handleClick = () =>{
+        const [ place ] = inputRef.current.getPlaces()
+        const lat = place.geometry.location.lat()
+        const lng = place.geometry.location.lng()
+
+        setPosition((prevPositions) =>[...prevPositions, { lat, lng }])
+        
+        isLoaded ? (
+            <Marker position = {{ lat: place.geometry.location.lat(), lng: place.geometry.location.lng() }} icon={ markerMaps }/>
+        ) : (<></>)
     }
+
+    const inputRef = useRef(null)
 
     //Isolando para o onChange nao ficar re-renderizando o componente pai
     const Input = () =>{
-        //Pegando o valor digitado no input
-        const [ posicao, setPosicao ] = useState('')
-        return(<>
-        <input type="text" name="posicao" id="posicao" placeholder="Digite algo..." onChange={ (e) => setPosicao(e.target.value) } className="input-posicao"/><span className="span-pesquisar" onClick={ (e) => handleClick(posicao)}></span>
-        </>)
+        return(
+        <>
+            {isLoaded &&
+                <StandaloneSearchBox onLoad={(ref) => inputRef.current = ref}>
+                    <div>
+                        <input type="text" name="posicao" id="posicao" placeholder="Digite algo..." className="input-posicao"/><span className="span-pesquisar" onClick={handleClick}></span>
+                    </div>
+                </StandaloneSearchBox>
+            }
+
+        </>
+
+        )
     }
 
     return(

@@ -13,6 +13,8 @@ footer ul{
 
 footer li{
     list-style: none;
+    text-shadow: rgba(255, 255, 255, 0.5) 0px 6px 6px;
+    position: relative
 }
 
 .container-doe, .container-sobre, .container-contato, .container-redes{
@@ -46,4 +48,8 @@ footer li{
     width: 100%;
     max-width: 2.25rem;
     height: auto;
+}
+
+footer ul li:hover{
+    cursor: pointer;
 }

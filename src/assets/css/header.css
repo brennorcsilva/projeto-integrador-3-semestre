@@ -42,14 +42,16 @@ header nav ul{
         position: absolute;
         top: 8vh;
         right: 0;
-        width: 50vh;
+        width: 100vw;
         height: 92vh;
         background-color: #D33741;
         flex-direction: column;
         align-items: center;
-        justify-content: space-around;
+        justify-content: flex-start;
         transform: translateX(100%);
         transition: transform 0.3s ease-in;
+        row-gap: 2rem;
+        padding-top: 2rem;
     }
     .nav-list li{
         margin-left: 0;

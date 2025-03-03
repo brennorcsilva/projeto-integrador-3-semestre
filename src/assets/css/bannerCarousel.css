@@ -5,3 +5,8 @@
     position: relative;
     
 }
+
+.banner-carousel .p-1, .banner-carousel .p-6, .banner-carousel .bg-card{
+    padding: 0;
+    border: 0;
+}

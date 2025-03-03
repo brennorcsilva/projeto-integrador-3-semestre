@@ -20,6 +20,7 @@
     -webkit-box-shadow: 0 0 10px #90baf9;
     box-shadow: 0 0 10px #90baf9;
     position: relative;
+    width: 100%;
 }
 
 .input-posicao:focus{
@@ -35,7 +36,8 @@
     background-repeat: no-repeat;
     position: absolute;
     bottom: .5rem;
-    right: 1.1rem;
+    right: 1rem;
+    background-color: #FFF;
 }
 
 .span-pesquisar:hover{
@@ -44,4 +46,8 @@
 
 .mapa-marker{
     margin-top: -2rem;
+}
+
+.gm-style-mtc button{
+    display: none !important;
 }
