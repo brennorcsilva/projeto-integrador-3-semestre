@@ -1,0 +1,24 @@
+.container-chat{
+    position: fixed;
+    background-color: #E4E4E4;
+    right: 2rem;
+    bottom: 2rem;
+    padding: 2rem 1rem;
+}
+
+.loading{
+    border: 1rem solid #F3F3F3;
+    border-top: 1rem solid #3498DB;
+    border-radius: 50%;
+    width: 4rem;
+    height: 4rem;
+    animation: gira 2s linear infinite;
+}
+
+@keyframes gira{
+    0%{
+        transform: rotate(0);
+    }100%{
+        transform: rotate(360deg);
+    }
+}

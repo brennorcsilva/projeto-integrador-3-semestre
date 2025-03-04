@@ -4,6 +4,7 @@ import LocaisDoacao from '../../components/LocaisDoacao/locaisDoacao';
 import BancoSangue from '../../components/BancoSangue/bancoSangue'
 import CarouselAvaliacoes from '../../components/CarouselAvaliacoes/carouselAvaliacoes';
 import Parceiros from '../../components/Parceiros/parceiros'
+import ChatBot from '../../components/ChatBot/chatBot'
 import Footer from '../../components/Footer/footer'
 import { motion } from 'framer-motion'
 
@@ -20,6 +21,7 @@ const Home = () =>{
             <BancoSangue/>
             <CarouselAvaliacoes/>
             <Parceiros/>
+            <ChatBot/>
             <Footer/>
     </motion.div>)
 }
