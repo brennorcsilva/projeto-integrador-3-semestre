@@ -1,17 +1,29 @@
 import '../../assets/css/chatBot.css'
-import { useState } from 'react'
+import imgLogo from '../../assets/img/logo.png'
+import imgRobo from '../../assets/img/robo.svg'
+import imgChat from '../../assets/img/chat.svg'
+import imgFechar from '../../assets/img/fechar.svg'
+import imgEnviar from '../../assets/img/enviar-mensagem.svg'   
+import React, { useState } from 'react'
 
 const ChatBot = () =>{
-    //Funcao que armazena a mensagem
+    //Variavel que armazena a pergunta atual e as ja enviadas
     const [ pergunta, setPergunta ] = useState('')
+    const [ perguntaEnviada, setPerguntaEnviada ] = useState([])
+
+    //Variavel que armazena a resposta atual e as ja enviadas
     const [ resposta, setResposta ] = useState('')
+    const [ respostaEnviada, setRespostaEnviada ] = useState([])
+    const [ isOpen, setOpen ] = useState(false)
     const [ loading, setLoading ] = useState(false)
 
     //Componente Loading
     const Loading = () =>{
-        return(
-            <div className="loading"></div>
-        )
+        return(<div className="flex gap-x-2 self-start px-3">
+            <span className="loading"></span>
+            <span className="loading"></span>
+            <span className="loading"></span>
+        </div>)
     }
 
     //Funcao responsável por enviar a mensagem que o usuario digitar a IA
@@ -22,15 +34,15 @@ const ChatBot = () =>{
             const res = await fetch('https://openrouter.ai/api/v1/chat/completions',{
                 method: 'POST',
                 headers: {
-                    "Authorization": "Bearer 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",
+                    "Authorization": `Bearer ${ import.meta.env.VITE_CHATBOT_API_KEY }`,
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    model: "deepseek/deepseek-r1:free",
+                    model: "qwen/qwen-vl-plus:free",
                     messages: [
                         {
                             role: "user",
-                            content: pergunta 
+                            content: `Suas respostas irão se adaptar sempre ao contexto do Brasil, e irá responder somente perguntas relacionadas a doação de sangue e sangue em geral. Você irá analisar a mensagem do usuário e caso o usuário pergunte qualquer outra coisa, você irá retornar a resposta "Não foi possivel gerar uma resposta que não seja relacionada a sangue! Tente novamente". Mensagem do usuário: ${ pergunta }}`
                         }
                     ]
                 })
@@ -40,7 +52,12 @@ const ChatBot = () =>{
             const data = await res.json()
 
             //Aqui é armazenada a reposta da IA(isso se ela existir) e também tirando os ** que a resposta gera.
+            //Como resposta é um array e podem existir respostas antes dela, é utilizado esse método.
             setResposta(data.choices?.[0]?.message?.content.split('*').join('') || "Não foi possível gerar uma resposta com essa mensagem! Tente novamente.")
+            
+            setPerguntaEnviada(prev => [...prev, pergunta])
+            setRespostaEnviada(prev => [...prev, data.choices?.[0]?.message?.content.split('*').join('') || "Não foi possível gerar uma resposta com essa mensagem! Tente novamente."])
+
             setPergunta('')
             setLoading(false)
         }catch(error){
@@ -52,15 +69,60 @@ const ChatBot = () =>{
     }
 
     return(
-        <div className="container-chat flex justify-center items-center flex-col gap-y-2">
-            <h1>ChatBot teste!!!!</h1>
+        <section className="z-5 fixed section-chatbot">
+            { !isOpen && (
+                <div className="container-button flex justify-center items-center flex-col gap-y-2 cursor-pointer" onClick={(() => setOpen(true))}>
+                    <img src={ imgChat } alt="icone chatbot"/>            
+                </div>
+            )}
 
-            <input type="text" placeholder="Qual sua pergunta?" onChange={ (e) => setPergunta(e.target.value) } className="text-center"/>
-            <button onClick={ handleClick } className="cursor-pointer">Enviar mensagem</button>
-            { loading &&(<Loading/>) }
 
-            { (!loading && !pergunta) &&(<p>{ resposta }</p>) }
-        </div>
+            { isOpen && (
+                <div className="container-chat flex justify-center items-inherit flex-col">
+                    <nav className="bg-black flex justify-between items-center nav-chatbot">
+                        <img src={ imgLogo } alt="logo horizon" className="max-w-[5rem]"/>
+                        <button onClick={ () => setOpen(false) } className="cursor-pointer self-end text-white"><img src={ imgFechar } alt="icone fechar"/></button>
+                    </nav>
+
+                    <div className="container-fundo flex justify-center items-center flex-col gap-y-1">
+                        
+                        {/*Se a resposta for vazia, irá exibir somente o default */}
+                        { !resposta &&(<>
+                            <img src={ imgRobo } alt="imagem robo IA fundo" className="img-robo"/>
+                            <p className="text-gray-400 text-md">Como Posso Ajudar Hoje?</p>
+                        </>) }
+
+                        { /*Se o loading for verdadeiro, irá exibir a animacao de carregamento até que a resposta esteja pronta*/ }
+                        { loading &&(<>
+                                { perguntaEnviada.map((perg, i) => (<React.Fragment key={i}>
+                                    <p key={ `pergunta-${i}`} className="max-w-[85%] self-end text-sm bg-black text-white px-3 py-2">{ perg }</p>
+                                    <p key={ `resposta${i}` } className="max-w-[85%] self-start text-sm bg-white text-black px-3 py-2">{ respostaEnviada[i] }</p>
+                                </React.Fragment>))}
+                            <Loading/>
+
+                            </>) }
+
+
+                        {/*Agora se o loading for falso e a resposta for maior ou igual a 1, então é possível carregar a pergunta e a resposta */ }
+                        { (!loading && !resposta.length <= 0) &&(<>
+                            
+                            {perguntaEnviada.map((perg, i) =>(<React.Fragment key={i}>
+                                <p key={ `pergunta-${i}`} className="max-w-[85%] self-end text-sm bg-black text-white px-3 py-2">{ perg }</p>
+                                <p key={ `resposta${i}` } className="max-w-[85%] self-start text-sm bg-white text-black px-3 py-2">{ respostaEnviada[i] }</p>
+                            </React.Fragment>))}
+
+                            </>) }
+
+                    </div>
+
+                    <div className="container-input relative flex gap-x-4 justify-center items-center">
+                        <input type="text" placeholder="Digite sua pergunta..." onChange={ (e) => setPergunta(e.target.value)} className="input-chat" value={ pergunta }/>
+                        <span onClick={ handleClick } className="span-enviar flex justify-center items-center cursor-pointer"><img src={ imgEnviar }/></span>
+                    </div>
+
+                </div>
+                )}
+        </section>
     )
 }
 
