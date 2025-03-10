@@ -1,6 +1,6 @@
 import '../../assets/css/formulario.css'
 import logo from '../../assets/img/logo-circulo.png'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useMask  } from '@react-input/mask'
 import { Link } from 'react-router-dom'
 
@@ -44,13 +44,18 @@ const Formulario = ({ formCadastro }) =>{
 
     const handleConfirmarSenha = (e) =>{
         setConfirmarSenha(e.target.value)
+    }
 
+    //Obrigando o react a alterar o estado da senha/confirmarSenha para nao bugar na manipulação assíncrona padrão do React
+    useEffect(() =>{
         if(!isSenha){
-            if(senha === confirmarSenha){
+            if(senha === confirmarSenha && confirmarSenha.length >= 3){
                 setSenhaFinal(true)
+            }else{
+                setSenhaFinal(false)
             }
         }
-    }
+    }, [senha, confirmarSenha, isSenha])
 
     return(
         <section className="formulario flex align-center">
@@ -75,19 +80,23 @@ const Formulario = ({ formCadastro }) =>{
 
                             <input type="text" name="endereco" id="endereco" placeholder="Endereço" className="w-100 text-lg" onChange={(e) => setEndereco(e.target.value)}/>
                             <input type="text" name="cep" id="cep" placeholder="CEP" className="w-50 text-lg" ref={ cepRef } onChange={(e) => setCep(e.target.value)}/>
-                            <input type="password" name="senha" id="senha" placeholder="Senha" className="w-75 text-lg" onChange={handleSenhaChange}/>
-                            <input type="password" name="confirmarSenha" id="confirmarSenha" placeholder="Confirmar senha" className="w-75 text-lg" onChange={handleConfirmarSenha}/>
+                            <input type="password" name="senha" id="senha" placeholder="Senha" className="w-75 text-lg" onKeyUp={handleSenhaChange}/>
+                            <input type="password" name="confirmarSenha" id="confirmarSenha" placeholder="Confirmar senha" className="w-75 text-lg" onChange={(e) => handleConfirmarSenha(e)}/>
                             <p className="text-sm text-[#9D9D9D]">Use oito ou mais caracteres com uma combinação de letras, números e símbolos</p>
 
-                            { isSenha && (<p className="text-red-600 text-sm">A senha não atende aos requisitos!</p>)}
-                            { (!isSenha && senha.length >= 3 ) && (<p className="text-green-600 text-sm">A senha atende aos requisitos!</p>) }
-                            
-                            { (!senhaFinal && confirmarSenha.length >= 3) && (<p className="text-red-600 text-sm">As senhas não coincidem!</p>) }
-                            { senhaFinal && (<p className="text-green-600 text-sm">As senhas coincidem!</p> ) }
-                            
-                        </>) }
+                            <div className="container-avisos flex flex-col justify-center align-center w-full">
+                                <div className="container-mensagem flex gap-x-4 flex-col">
+                                    { isSenha && (<p className="text-red-600 text-sm">A senha não atende aos requisitos!</p>)}
+                                    { (!isSenha && senha.length >= 3 ) && (<p className="text-green-600 text-sm">A senha atende aos requisitos!</p>) }
+                                    
+                                    { senhaFinal && (<p className="text-green-600 text-sm">As senhas coincidem!</p>) }
+                                    { (!senhaFinal &&  confirmarSenha.length >= 3) && (<p className="text-red-600 text-sm">As senhas não coincidem!</p>) }
+                                </div>
+                            <input type="submit" value="Cadastrar" className="mx-auto mt-6 mb-6 botao-form text-white font-semibold text-lg"/>
 
-                        <input type="submit" value="Cadastrar" className="mx-auto mt-6 mb-6 botao-form text-white font-semibold text-lg"/>
+                            </div>
+
+                        </>) }
                     </form>
             </div>
         </section>
