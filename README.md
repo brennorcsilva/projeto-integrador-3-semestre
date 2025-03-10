@@ -13,8 +13,7 @@ Desenvolvimento de um sistema web para facilitar a conexão entre doadores de sa
 - Node(versão >= 20)
 
 2. Clone o repositório:
-- ``` bash
-git clone https://github.com/brennorcsilva/projeto-integrador-3-semestre.git
+- ``` bash git clone https://github.com/brennorcsilva/projeto-integrador-3-semestre.git
 
 3. Instale as dependências:
 - cd projeto-integrador-3-semestre
