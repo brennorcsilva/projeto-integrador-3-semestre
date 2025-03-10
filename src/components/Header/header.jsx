@@ -2,6 +2,7 @@ import '../../assets/css/header.css'
 import logo from '../../assets/img/logo.png'
 import usuario from '../../assets/img/usuario.svg'
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader,  AlertDialogTitle, } from "@/components/ui/alert-dialog"
+import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 
 const Header = () =>{
@@ -103,7 +104,7 @@ const Header = () =>{
 
                 </div>
                 <ul className='nav-list'>
-                    <li>Agendar</li>
+                    <li><Link to="/cadastro">Agendar</Link></li>
                     <li>Mitos</li>
                     <li>Suporte</li>
                     <li>Apoiadores</li>

@@ -1,0 +1,49 @@
+.formulario{
+    border-radius: 30px;
+    width: 100%;
+    max-width: 80rem;
+    margin: 2rem auto;
+    -webkit-box-shadow: 0 0 10px #9c9999;
+    box-shadow: 0 0 10px #9c9999;
+}
+
+.container-login{
+    border-radius: 30px 0 0 30px;
+    padding: 2rem;
+}
+
+.logo-login{
+    max-width: 8rem;
+    height: auto;
+    margin: 0 auto;
+}
+
+.container-cadastro{
+    width: 100%;
+    background-color: #F5F5F5;
+    padding: 2rem 0 0 0;
+    border-radius: 30px;
+}
+
+.form{
+    max-width: 40rem;
+}
+
+.form input[type="text"], .form input[type="email"], .form input[type="password"]{
+    background-color: #EEEDED;
+    border: 1px solid #C6C6C6;
+    border-radius: 9px;
+    padding: .3rem .5rem;
+}
+
+.botao-form{
+    background-color: var(--cor-sangue);
+    padding: .5rem 2rem;
+    border-radius: 41px;
+    transition: all ease-in-out .5s;
+}
+
+.botao-form:hover{
+    cursor: pointer;
+    transform: translateY(-10px) scale(1.1);
+}
