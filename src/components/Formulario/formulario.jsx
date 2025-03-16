@@ -3,6 +3,7 @@ import logo from '../../assets/img/logo-circulo.png'
 import { useState, useEffect } from 'react';
 import { useMask  } from '@react-input/mask'
 import { Link } from 'react-router-dom'
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader,  AlertDialogTitle, } from "@/components/ui/alert-dialog"
 
 
 const Formulario = ({ formCadastro }) =>{
@@ -14,6 +15,9 @@ const Formulario = ({ formCadastro }) =>{
     const [ cpf, setCpf ] = useState('')
     const [ cep, setCep ] = useState('')
     const [ endereco, setEndereco ] = useState('')
+    
+    //Estado responsável para controle do componente de avisos
+    const [ isAvisoOpen, setIsAvisoOpen ] = useState(false)
 
     //Estados responsáveis por monitorar se a senha preenche os requisitos e também se a senha é igual ao confirmar senha
     const [ isSenha, setIsSenha ] = useState(false)
@@ -31,6 +35,7 @@ const Formulario = ({ formCadastro }) =>{
     })
     
 
+    //Lidando com a mudança de senha e verificacoes de requisitos
     const handleSenhaChange = (e) =>{
         setSenha(e.target.value)
 
@@ -42,6 +47,7 @@ const Formulario = ({ formCadastro }) =>{
         }
     }
 
+    //Funcao para alterar o valor do estado confirmarSenha
     const handleConfirmarSenha = (e) =>{
         setConfirmarSenha(e.target.value)
     }
@@ -57,15 +63,103 @@ const Formulario = ({ formCadastro }) =>{
         }
     }, [senha, confirmarSenha, isSenha])
 
+    //Componente para exibir mensagens ao usuario
+    const Aviso = ({mensagem}) =>{
+        return(
+            isAvisoOpen && (
+                <AlertDialog defaultOpen={ true }>
+                    <AlertDialogContent onEscapeKeyDown={ () => setIsAvisoOpen(false) } >
+                        <AlertDialogHeader>
+                        <AlertDialogTitle className="text-red-600">Informações Inválidas!</AlertDialogTitle>
+                        <AlertDialogDescription>
+                            { mensagem }
+                        </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                        <AlertDialogAction onClick={ () => setIsAvisoOpen(false)}>Fechar</AlertDialogAction>
+                        </AlertDialogFooter>
+                    </AlertDialogContent>
+                </AlertDialog>
+            )
+        )
+        
+    }
+
+    //Função para verificar se o CPF existe
+    const verificacaoCpf = (e) =>{
+        //Criando o array para armazenar os valores
+        const arrayCpf = [];
+
+        //Array para armazenar o produto do calculo de CPF
+        var produtosCpf = [];
+        let j = 1;
+
+        //Armazenando a soma dos dígitos do CPF
+        let soma = 0;;
+        
+        //Armazenando o valor sem os pontos e traços no array
+        arrayCpf[0] = cpf.split('.').join('').split('-').join('');
+
+        //Agora, armazenando em cada índice um valor
+        arrayCpf.push(arrayCpf[0].split(''));
+        
+        //Criando uma variável clone para armezanar o CPF pós formatação
+        const cpfFinal = cpf.split('.').join('').split('-').join('');
+
+        //Looping para calcular o produto de cada índice do array
+        for(let i = 0; i < 9; i++){
+            produtosCpf.push(arrayCpf[1][i] * j);
+            soma += produtosCpf[i];
+            j++;
+        }
+
+        //Armazenando o resto da divisao ao CPF
+        produtosCpf.push(soma % 11);
+
+        //Se der maior ou igual a 10, pela regra = 0
+        if(soma % 11 >= 10){
+            arrayCpf[1][9] = 0;
+        }else{
+            arrayCpf[1][9] = soma % 11;
+        }
+        
+        //Zerando os valores para começar a conta do 11 dígito
+        soma = 0;
+        j = 0;
+        produtosCpf = [];
+        //Looping para calcular o ultimo digito do CPF
+        for(let i = 0; i < 10; i++){
+            produtosCpf.push(arrayCpf[1][i] * j);
+            soma += produtosCpf[i];
+            j++; 
+        }
+
+        //Se der maior ou igual a 10, pela regra = 0
+        if(soma % 11 >= 10){
+            arrayCpf[1][10] = 0;
+        }else{
+            arrayCpf[1][10] = soma % 11;
+        }
+        
+        //Se o valor calculado for igual ao CPF final, cpf valido
+        if(arrayCpf[1].toString().split(',').join('') == cpfFinal){
+            return alert("Verdadeiro")
+        }else{
+            e.preventDefault()
+            setIsAvisoOpen(true)
+            setCpf('')
+        }
+    }
+
     return(
         <section className="formulario flex align-center">
             <div className="container-login bg-(--cor-fundo) flex flex-col justify-center align-center w-1/3">
                 <img src={ logo } alt="logo do site" className="logo-login"/>  
-                <h1 className="text-white mb-8 text-(length:--tamanho-texto) font-bold text-center">Bem-vindo novamente!</h1>
+                <h1 className="text-white mb-8 mt-2 text-(length:--tamanho-texto) font-bold text-center">Bem-vindo novamente!</h1>
 
                 <p className="text-white font-bold text-center">Já possui uma conta?</p>
                 <p className="text-white font-bold text-center">Acesse-a agora mesmo!</p>
-                <Link to="/login" className="text-white font-bold text-center">Acessar conta</Link>
+                <Link to="/login" className="text-white font-bold text-center botao-entrar">Entrar</Link>
             </div>
 
             <div className="container-cadastro flex flex-col align-center">
@@ -75,7 +169,7 @@ const Formulario = ({ formCadastro }) =>{
 
                         { formCadastro && (<>
                             <input type="text" name="nome" id="nome" placeholder="Nome" className="w-100 text-lg" onChange={(e) => setNome(e.target.value)}/>
-                            <input type="text" name="cpf" id="cpf" placeholder="CPF" className="w-50 text-lg" ref={ cpfRef } onChange={(e) => setCpf(e.target.value)}/>
+                            <input type="text" name="cpf" id="cpf" placeholder="CPF" className="w-50 text-lg" ref={ cpfRef } onChange={(e) => setCpf(e.target.value)} value={ cpf }/>
                             <input type="email" name="email" id="email" placeholder="E-mail" className="w-[96.5%] text-lg" onChange={(e) => setEmail(e.target.value)}/>
 
                             <input type="text" name="endereco" id="endereco" placeholder="Endereço" className="w-100 text-lg" onChange={(e) => setEndereco(e.target.value)}/>
@@ -92,13 +186,14 @@ const Formulario = ({ formCadastro }) =>{
                                     { senhaFinal && (<p className="text-green-600 text-sm">As senhas coincidem!</p>) }
                                     { (!senhaFinal &&  confirmarSenha.length >= 3) && (<p className="text-red-600 text-sm">As senhas não coincidem!</p>) }
                                 </div>
-                            <input type="submit" value="Cadastrar" className="mx-auto mt-6 mb-6 botao-form text-white font-semibold text-lg"/>
+                            <input type="submit" value="Cadastrar" className="mx-auto mt-6 mb-6 botao-form text-white font-semibold text-lg" onClick={verificacaoCpf}/>
 
                             </div>
 
                         </>) }
                     </form>
             </div>
+            <Aviso mensagem="O CPF Digitado está errado! Tente novamente"/>
         </section>
     )
 }

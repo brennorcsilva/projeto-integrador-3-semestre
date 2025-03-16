@@ -36,14 +36,23 @@
     padding: .3rem .5rem;
 }
 
-.botao-form{
-    background-color: var(--cor-sangue);
-    padding: .5rem 2rem;
+.botao-form, .botao-entrar{
     border-radius: 41px;
     transition: all ease-in-out .5s;
 }
 
-.botao-form:hover{
+.botao-form{
+    background-color: var(--cor-sangue);
+    padding: .5rem 2rem;
+}
+
+.botao-form:hover, .botao-entrar:hover{
     cursor: pointer;
     transform: translateY(-10px) scale(1.1);
+}
+
+.botao-entrar{
+    border: 4px solid #FFF;
+    padding: .5rem 3rem;
+    margin: 2rem auto 0 auto;
 }
