@@ -194,6 +194,7 @@ const Formulario = ({ formCadastro }) =>{
                     </form>
             </div>
             <Aviso mensagem="O CPF Digitado está errado! Tente novamente"/>
+
         </section>
     )
 }

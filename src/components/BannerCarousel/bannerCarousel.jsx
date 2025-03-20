@@ -4,6 +4,7 @@ import AutoPlay from 'embla-carousel-autoplay'
 import '../../assets/css/bannerCarousel.css'
 import ImgCarousel from '../../assets/img/bannerCarousel/doacao-de-sangue.png'
 
+
 const BannerCarousel = () =>{
 
     const CarouselHome = () =>{
