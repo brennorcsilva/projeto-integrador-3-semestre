@@ -56,3 +56,31 @@
     padding: .5rem 3rem;
     margin: 2rem auto 0 auto;
 }
+
+@media screen and (max-width: 1440px){
+    .formulario{
+        max-width: 90%;
+    }
+}
+
+@media screen and (max-width: 1200px){
+    .formulario form{
+        display: grid;
+        grid-template-columns: repeat(2, 50%);
+        column-gap: 2rem;
+        width: 90%;
+    }
+
+    #endereco, #senha, #cpf{
+        width: calc(var(--spacing) * 60);
+    }
+
+    .container-cadastro{
+        padding: 2rem 2rem 0 2rem;
+    }
+
+    .formulario form input{
+        width: unset;
+    }
+
+}
