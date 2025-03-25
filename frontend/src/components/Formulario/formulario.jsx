@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useMask  } from '@react-input/mask'
 import { Link } from 'react-router-dom'
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader,  AlertDialogTitle, } from "@/components/ui/alert-dialog"
+import axios from 'axios'
 
 
 const Formulario = ({ formCadastro }) =>{
@@ -18,6 +19,7 @@ const Formulario = ({ formCadastro }) =>{
     
     //Estado responsável para controle do componente de avisos
     const [ isAvisoOpen, setIsAvisoOpen ] = useState(false)
+    const [ avisoInfo, setAvisoInfo ] = useState({ titulo: '', mensagem: '', erro: false })
 
     //Estados responsáveis por monitorar se a senha preenche os requisitos e também se a senha é igual ao confirmar senha
     const [ isSenha, setIsSenha ] = useState(false)
@@ -64,13 +66,15 @@ const Formulario = ({ formCadastro }) =>{
     }, [senha, confirmarSenha, isSenha])
 
     //Componente para exibir mensagens ao usuario
-    const Aviso = ({mensagem}) =>{
+    const Aviso = ({titulo, mensagem, erro}) =>{
         return(
             isAvisoOpen && (
                 <AlertDialog defaultOpen={ true }>
                     <AlertDialogContent onEscapeKeyDown={ () => setIsAvisoOpen(false) } >
                         <AlertDialogHeader>
-                        <AlertDialogTitle className="text-red-600">Informações Inválidas!</AlertDialogTitle>
+                        { erro ? (<AlertDialogTitle className="text-red-600">{ titulo }</AlertDialogTitle>) 
+                        : (<AlertDialogTitle className="text-green-600">{ titulo }</AlertDialogTitle>)
+                        }
                         <AlertDialogDescription>
                             { mensagem }
                         </AlertDialogDescription>
@@ -86,7 +90,7 @@ const Formulario = ({ formCadastro }) =>{
     }
 
     //Função para verificar se o CPF existe
-    const verificacaoCpf = (e) =>{
+    const verificacaoCpf = async(e) =>{
         //Criando o array para armazenar os valores
         const arrayCpf = [];
 
@@ -143,11 +147,35 @@ const Formulario = ({ formCadastro }) =>{
         
         //Se o valor calculado for igual ao CPF final, cpf valido
         if(arrayCpf[1].toString().split(',').join('') == cpfFinal){
-            return alert("Verdadeiro")
+            e.preventDefault()
+            //Agora eu faço a requisicao e jogo as infos no BD
+            try{
+                const res = await axios.post("http://localhost:8080/adicionarUsuario", {
+                    "nome_usuario": nome,
+                    "email_usuario": email,
+                    "cpf_usuario": cpf,
+                    "senha_usuario": senha
+                })
+                console.log(res.data)
+                setIsAvisoOpen(true)
+                setAvisoInfo({
+                    titulo: "Informações Válidas!",
+                    mensagem: "Cadastro realizado com sucesso!",
+                    erro: false
+                })
+            }catch(error){
+                console.log(error)
+            }
         }else{
             e.preventDefault()
             setIsAvisoOpen(true)
+            setAvisoInfo({
+                titulo: "Informações Inválidas!",
+                mensagem: "O CPF digitado não existe! Tente novamente",
+                erro: true
+            })
             setCpf('')
+
         }
     }
 
@@ -190,10 +218,10 @@ const Formulario = ({ formCadastro }) =>{
 
                             </div>
 
+                            <Aviso titulo={ avisoInfo.titulo } mensagem={ avisoInfo.mensagem } erro={ avisoInfo.erro }/>
                         </>) }
                     </form>
             </div>
-            <Aviso mensagem="O CPF Digitado está errado! Tente novamente"/>
 
         </section>
     )
