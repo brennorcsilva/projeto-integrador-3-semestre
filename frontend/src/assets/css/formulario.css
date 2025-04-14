@@ -83,4 +83,22 @@
         width: unset;
     }
 
+    .container-avisos{
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
+}
+
+@media screen and (max-width: 980px){
+    .texto-aviso{
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
+
+    #confirmarSenha{
+        grid-column-start: 1;
+        grid-column-end: 3;
+        width: 95%;
+        margin: 0 auto;
+    }
 }

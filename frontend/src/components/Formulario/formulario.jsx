@@ -80,7 +80,7 @@ const Formulario = ({ formCadastro }) =>{
                         </AlertDialogDescription>
                         </AlertDialogHeader>
                         <AlertDialogFooter>
-                        <AlertDialogAction onClick={ () => setIsAvisoOpen(false)}>Fechar</AlertDialogAction>
+                        <AlertDialogAction onClick={ () => setIsAvisoOpen(false)} className="cursor-pointer">Fechar</AlertDialogAction>
                         </AlertDialogFooter>
                     </AlertDialogContent>
                 </AlertDialog>
@@ -204,7 +204,7 @@ const Formulario = ({ formCadastro }) =>{
                             <input type="text" name="cep" id="cep" placeholder="CEP" className="w-50 text-lg" ref={ cepRef } onChange={(e) => setCep(e.target.value)}/>
                             <input type="password" name="senha" id="senha" placeholder="Senha" className="w-75 text-lg" onKeyUp={handleSenhaChange}/>
                             <input type="password" name="confirmarSenha" id="confirmarSenha" placeholder="Confirmar senha" className="w-75 text-lg" onChange={(e) => handleConfirmarSenha(e)}/>
-                            <p className="text-sm text-[#9D9D9D]">Use oito ou mais caracteres com uma combinação de letras, números e símbolos</p>
+                            <p className="text-sm text-[#9D9D9D] texto-aviso">Use oito ou mais caracteres com uma combinação de letras, números e símbolos</p>
 
                             <div className="container-avisos flex flex-col justify-center align-center w-full">
                                 <div className="container-mensagem flex gap-x-4 flex-col">
