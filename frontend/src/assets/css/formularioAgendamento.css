@@ -1,0 +1,30 @@
+.container-agendamento{
+    -webkit-box-shadow: 0 0 10px #9c9999;
+    box-shadow: 0 0 10px #9c9999;
+    width: 100%;
+    max-width: 60rem;
+    margin: 2rem auto;
+    padding: 1rem 0;
+    border-radius: 30px;
+}
+
+.container-form, .container-doacao{
+    padding: 0 2rem;
+}
+
+.container-form{
+    border-right: 2px solid #C6C6C6;
+}
+
+.container-form .rdp-button_reset:hover{
+    cursor: pointer;
+}
+
+.locais-doacao{
+    background-color: unset;
+    padding: 0;
+}
+
+.locais-doacao, .container-form form{
+    margin-top: 1rem;
+}

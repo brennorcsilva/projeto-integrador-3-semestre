@@ -104,11 +104,11 @@ const Header = () =>{
 
                 </div>
                 <ul className='nav-list'>
-                    <li><Link to="/cadastro">Agendar</Link></li>
+                    <li><Link to="/agendamento">Agendar</Link></li>
                     <li>Mitos</li>
                     <li>Suporte</li>
                     <li>Apoiadores</li>
-                <li><img src={ usuario } alt="imagem usuario" className="img-usuario"/></li>
+                <li><Link to="/cadastro"><img src={ usuario } alt="imagem usuario" className="img-usuario"/></Link></li>
                 </ul>
             </nav>
             <Cookies className="cookies"/>

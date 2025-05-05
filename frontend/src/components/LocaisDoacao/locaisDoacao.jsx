@@ -3,7 +3,7 @@ import { GoogleMap, useJsApiLoader, StandaloneSearchBox, Marker } from '@react-g
 import { useState, useEffect, useRef } from 'react'
 import markerMaps from '../../assets/img/marker-maps.svg'
 
-const LocaisDoacao = () =>{
+const LocaisDoacao = ({ mostrarTexto }) =>{
 
     const [ userLocation, setUserLocation ] = useState(null)
 
@@ -111,15 +111,22 @@ const LocaisDoacao = () =>{
 
     return(
         <section className="locais-doacao flex items-start justify-evenly">
-            <div className="container-texto flex align-center justify-center flex-col gap-y-6">
-                <h1 className="text-white text-(length:--tamanho-titulo) font-bold text-center">Locais para Doação</h1>
-                <p className="text-white text-(length:--tamanho-texto) texto-doacao text-center">A nossa missão é otimizar e agilizar todo o processo de doação de sangue e plaquetas! Ao visitar nosso site, você pode encontrar os hospitais e postos de coleta mais próximos que utilizam o software CONEXSP. Basta inserir seu endereço ao lado e verificar as opções disponíveis. Juntos, salvaremos vidas :)</p>
-            </div>
+            { mostrarTexto ? (<>
+                <div className="container-texto flex align-center justify-center flex-col gap-y-6">
+                    <h1 className="text-white text-(length:--tamanho-titulo) font-bold text-center">Locais para Doação</h1>
+                    <p className="text-white text-(length:--tamanho-texto) texto-doacao text-center">A nossa missão é otimizar e agilizar todo o processo de doação de sangue e plaquetas! Ao visitar nosso site, você pode encontrar os hospitais e postos de coleta mais próximos que utilizam o software CONEXSP. Basta inserir seu endereço ao lado e verificar as opções disponíveis. Juntos, salvaremos vidas :)</p>
+                </div>
 
-            <div className="container-img w-full flex align-center justify-center flex-col relative gap-y-4">
-                { userLocation  && (<Mapa/>)}
-                <Input/>
-            </div>
+                <div className="container-img w-full flex align-center justify-center flex-col relative gap-y-4">
+                    { userLocation  && (<Mapa/>)}
+                    <Input/>
+                </div>
+            </>) : (
+                    <div className="container-img w-full flex align-center justify-center flex-col relative gap-y-4">
+                        { userLocation  && (<Mapa/>)}
+                        <Input/>
+                    </div>
+            )}
         </section>
     )
 }

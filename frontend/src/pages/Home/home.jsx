@@ -17,7 +17,7 @@ const Home = () =>{
             transition={{ duration: 1.3 }}>
             <Header/>
             <BannerCarousel/>
-            <LocaisDoacao/>
+            <LocaisDoacao mostrarTexto={true}/>
             <BancoSangue/>
             <CarouselAvaliacoes/>
             <Parceiros/>
