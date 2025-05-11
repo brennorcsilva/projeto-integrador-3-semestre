@@ -1,0 +1,26 @@
+.container-agendamento-horarios{
+    position: absolute;
+    width: 100%;
+    max-width: 15rem;
+    box-shadow: 0 0 10px #9C9999;
+    -webkit-box-shadow: 0 0 10px #9C9999;
+    padding: .5rem 1rem;
+    border-radius: 30px;
+    background-color: #FFF;
+    top: 0;
+    left: 22rem;
+    height: 25rem;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.container-agendamento-horarios::-webkit-scrollbar{
+    display: none;
+}
+
+.horarios button{
+    border: 2px solid #007bff;
+    font-size: var(--tamanho-texto);
+    border-radius: 10px;
+}
