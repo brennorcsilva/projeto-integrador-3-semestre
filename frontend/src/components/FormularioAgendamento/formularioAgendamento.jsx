@@ -66,7 +66,7 @@ const FormularioAgendamento = () =>{
 
             <div className="container-doacao">
                 <h1 className="text-2xl text-(--cor-sangue) font-bold text-center">Encontre os pontos de coleta mais próximos</h1>
-                {/*<LocaisDoacao/>*/}
+                {<LocaisDoacao/>}
             </div>
         </section>
     )

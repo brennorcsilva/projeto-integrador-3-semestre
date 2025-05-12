@@ -13,6 +13,7 @@
     overflow-y: scroll;
     -ms-overflow-style: none;
     scrollbar-width: none;
+    z-index: 99;
 }
 
 .container-agendamento-horarios::-webkit-scrollbar{
