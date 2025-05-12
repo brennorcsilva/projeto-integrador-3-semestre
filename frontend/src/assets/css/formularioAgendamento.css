@@ -19,12 +19,3 @@
 .container-form .rdp-button_reset:hover{
     cursor: pointer;
 }
-
-.locais-doacao{
-    background-color: unset;
-    padding: 0;
-}
-
-.locais-doacao, .container-form form{
-    margin-top: 1rem;
-}
