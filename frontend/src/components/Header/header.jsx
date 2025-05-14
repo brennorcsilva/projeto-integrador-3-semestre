@@ -106,7 +106,7 @@ const Header = () =>{
                 <ul className='nav-list'>
                     <li><Link to="/agendamento">Agendar</Link></li>
                     <li>Mitos</li>
-                    <li>Suporte</li>
+                    <li><Link to="/suporte">Suporte</Link></li>
                     <li>Apoiadores</li>
                 <li><Link to="/cadastro"><img src={ usuario } alt="imagem usuario" className="img-usuario"/></Link></li>
                 </ul>
