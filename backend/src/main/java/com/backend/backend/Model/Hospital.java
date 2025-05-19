@@ -8,21 +8,22 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document
+@Document(collection="hospital")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Usuario{
+public class Hospital {
     @Transient
-    public static final String SEQUENCE_NAME = "usuario_sequence";
+    public static final String SEQUENCE_NAME = "hospital_sequence";
 
     @Id
     @Generated
-    private Long id_usuario;
+    private long id_hospital;
 
-    private String nome_usuario;
-    private String email_usuario;
-    private String cpf_usuario;
-    private String senha_usuario;
-    private String tipo_sanguineo;
+
+    private String cnpj_hospital;
+    private String nome_hospital;
+
+    //Endereco sera por ex: Rua dos bobos, 231
+    private String endereco_hospital;
 }

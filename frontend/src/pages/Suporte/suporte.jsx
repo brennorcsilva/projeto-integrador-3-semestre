@@ -14,7 +14,7 @@ const Suporte = () =>{
                 
                 <Header/>
 
-                <section className="section-contato p-(--espacamento) relative">
+                <section className="section-contato p-(--espacamento) relative flex justify-around">
                     <Contato/>
                 </section>
 

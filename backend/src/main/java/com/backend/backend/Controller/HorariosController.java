@@ -3,6 +3,7 @@ package com.backend.backend.Controller;
 import com.backend.backend.Helpers.HelperCrud;
 import com.backend.backend.Model.Horarios;
 import com.backend.backend.Repository.HorariosRepo;
+import com.backend.backend.Service.HorariosService;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -16,29 +17,26 @@ import java.util.*;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:5173")
-public class HorariosController extends HelperCrud {
+public class HorariosController extends HorariosService {
     @Autowired
     HorariosRepo HorariosRepo;
     private HorariosRepo horariosRepo;
 
+    @Autowired
+    private HorariosService horariosService;
+
     //Inserir Horarios
     @PostMapping("/adicionarHorarios")
-    public String adicionarHorarios(@RequestBody Horarios horarios) {
+    public ResponseEntity<?> adicionarHorarios(@RequestBody Horarios horarios) {
         try{
-            //Horario temporario
-            Horarios horarioTemp = new Horarios();
+            ResponseEntity<?> horariosTemp = horariosService.adicionarHorarios(horarios);
 
-            //Definindo ao temporario os dados de horarios
-            horarioTemp.setId_horarios(gerarSequencia(Horarios.SEQUENCE_NAME));
-            horarioTemp.setDia_horarios(horarios.getDia_horarios());
-            horarioTemp.setMes_horarios(horarios.getMes_horarios());
-            horarioTemp.setHorario_horarios(horarios.getHorario_horarios());
-
-            //Salvando no REPO
-            HorariosRepo.save(horarioTemp);
-            return "Horários adicionados com sucesso!";
+            if(horariosTemp.getStatusCode() == HttpStatus.OK){
+                return ResponseEntity.status(HttpStatus.ACCEPTED).body("Horários adicionados com sucesso");
+            }
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro! Faça a requisição corretamente");
         }catch(Exception e){
-            return e.getMessage();
+            return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
 
@@ -46,15 +44,14 @@ public class HorariosController extends HelperCrud {
     @GetMapping("/lerHorarios")
     public ResponseEntity<?> lerHorarios(){
         try{
-            List<Horarios> horarios = HorariosRepo.findAll();
+            ResponseEntity<?> horariosTemp = horariosService.lerHorarios();
 
             //Se os horarios existirem...
-            if(!horarios.isEmpty()){
-                return ResponseEntity.ok(horarios);
+            if(horariosTemp.getStatusCode() == HttpStatus.OK){
+                return ResponseEntity.status(HttpStatus.ACCEPTED).body(horariosTemp.getBody());
             }else{
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro! Não hã horários cadastrados");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro! Faça a requisição corretamente");
             }
-
         }catch(Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
@@ -64,13 +61,13 @@ public class HorariosController extends HelperCrud {
     @GetMapping("/lerHorarios/{id}")
     public ResponseEntity<?> lerHorariosById(@PathVariable Long id){
         try{
-            Optional<Horarios> horarios = HorariosRepo.findById(id);
+            ResponseEntity<?> horariosTemp = horariosService.lerHorariosById(id);
 
-            //Se o usuário existir...
-            if(horarios.isPresent()){
-                return ResponseEntity.ok(horarios.get());
+            //Se os horarios existirem...
+            if(horariosTemp.getStatusCode() == HttpStatus.OK){
+                return ResponseEntity.status(HttpStatus.ACCEPTED).body(horariosTemp.getBody());
             }else{
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("ERRO! Horário não encontrado!");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro! Faça a requisição corretamente");
             }
         }catch(Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
@@ -81,29 +78,31 @@ public class HorariosController extends HelperCrud {
     @PatchMapping("/atualizarHorarios/{id}")
     public ResponseEntity<?> atualizarHorarios(@PathVariable Long id, @RequestBody String horaAgendamento){
         try{
-            //Primeiro pegando e armazenando os dados de horario
-            Horarios horarioTemp = HorariosRepo.findById(id).orElseThrow(() -> new RuntimeException("Horário não encontrado"));
+            ResponseEntity<?> horariosTemp = horariosService.atualizarHorarios(id, horaAgendamento);
 
-            List<String> horariosArray = horarioTemp.getHorario_horarios();
-
-            // Remover aspas extras, caso existam
-            horaAgendamento = horaAgendamento.replace("\"", "").trim();
-
-            // Verificar se o horário a ser removido está na lista
-            if (horariosArray.contains(horaAgendamento)) {
-                horariosArray.remove(horaAgendamento); // Remover o horário
-            } else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                        .body("Erro! O horário '" + horaAgendamento + "' não foi encontrado. Horários disponíveis: " + horariosArray);
+            //Se os horarios existirem...
+            if(horariosTemp.getStatusCode() == HttpStatus.OK){
+                return ResponseEntity.status(HttpStatus.ACCEPTED).body("Horarios atualizados com sucesso!");
+            }else{
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro! Faça a requisição corretamente");
             }
+        }catch(Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
 
-            horarioTemp.setHorario_horarios(horariosArray);
+    //Removendo todos os horarios
+    @DeleteMapping("/removerHorarios")
+    public ResponseEntity<?> removerHorarios(){
+        try{
+            ResponseEntity<?> horariosTemp = horariosService.removerHorarios();
 
-            //Salvando no repo
-            HorariosRepo.save(horarioTemp);
-
-            return ResponseEntity.ok(true);
-
+            //Se os horarios existirem...
+            if(horariosTemp.getStatusCode() == HttpStatus.OK){
+                return ResponseEntity.status(HttpStatus.ACCEPTED).body("Horarios removidos com sucesso!");
+            }else{
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro! Faça a requisição corretamente");
+            }
         }catch(Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }

@@ -24,6 +24,7 @@ public class Horarios {
     private long id_horarios;
 
     //ID do hospital vem aqui, por enquanto deixando vazio
+    private long id_hospital;
 
     private String dia_horarios;
     private Integer mes_horarios;

@@ -14,11 +14,6 @@ const Horarios = ({diaSelecionado}) =>{
                 const res = await axios.get('http://localhost:8080/lerHorarios')
                 res.data.map((data) =>(
                     setHorarios(prev => [...prev, data])
-                    //Fazer um setHorarios que funcione!
-                    /*                        id: data.id_horarios,
-                        dia: data.dia_horarios,
-                        mes: data.mes_horarios,
-                        horarios: data.horario_horarios*/
                 ))
             }catch(e){
                 console.log(`Erro! ${e}`)

@@ -4,7 +4,8 @@ import imgRobo from '../../assets/img/robo.svg'
 import imgChat from '../../assets/img/chat.svg'
 import imgFechar from '../../assets/img/fechar.svg'
 import imgEnviar from '../../assets/img/enviar-mensagem.svg'   
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 
 const ChatBot = () =>{
     //Variavel que armazena a pergunta atual e as ja enviadas
@@ -17,6 +18,9 @@ const ChatBot = () =>{
     const [ isOpen, setOpen ] = useState(false)
     const [ loading, setLoading ] = useState(false)
 
+    //Armazenando bancos de dados cadastrados
+    const [ bancoDados, setBancoDados ] = useState([])
+
     //Componente Loading
     const Loading = () =>{
         return(<div className="flex gap-x-2 self-start px-3">
@@ -25,6 +29,26 @@ const ChatBot = () =>{
             <span className="loading"></span>
         </div>)
     }
+
+    //Funcao responsavel para trazer infos do BD
+    useEffect(() =>{
+        const fetchData = ( async() =>{
+            try{
+                const res = await axios.get("http://localhost:8080/lerHospital")
+                console.log(res.data)
+
+                //Atribuindo agora somente os nomes à variavel
+                res.data.map((hospital) =>(
+                    setBancoDados(prev => [...prev, hospital.nome_hospital])
+                ))
+            }catch(e){
+                console.log(e)
+            }
+            
+        })
+        fetchData()
+
+    }, [])
 
     //Funcao responsável por enviar a mensagem que o usuario digitar a IA
     const handleClick = async() =>{
@@ -38,11 +62,11 @@ const ChatBot = () =>{
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    model: "qwen/qwen-vl-plus:free",
+                    model: "nousresearch/deephermes-3-mistral-24b-preview:free",
                     messages: [
                         {
                             role: "user",
-                            content: `Suas respostas irão se adaptar sempre ao contexto do Brasil, e irá responder somente perguntas relacionadas a doação de sangue e sangue em geral. Você irá analisar a mensagem do usuário e caso o usuário pergunte qualquer outra coisa, você irá retornar a resposta "Não foi possivel gerar uma resposta que não seja relacionada a sangue! Tente novamente". Mensagem do usuário: ${ pergunta }}`
+                            content: `Suas respostas irão se adaptar sempre ao contexto do Brasil, e irá responder somente perguntas relacionadas a doação de sangue e sangue em geral. Você irá analisar a mensagem do usuário e caso o usuário pergunte qualquer outra coisa, você irá retornar a resposta "Não foi possivel gerar uma resposta que não seja relacionada a sangue! Tente novamente". Caso o usuário pergunte, você terá agendamentos disponíveis em tais bancos: ${bancoDados}. Mensagem do usuário: ${ pergunta }}.`
                         }
                     ]
                 })

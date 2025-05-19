@@ -19,3 +19,7 @@
 .container-form .rdp-button_reset:hover{
     cursor: pointer;
 }
+
+.calendario{
+    border-radius: 15px;
+}
