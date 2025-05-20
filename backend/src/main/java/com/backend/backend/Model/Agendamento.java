@@ -24,7 +24,9 @@ public class Agendamento {
 
     private long id_hospital;
 
-    private String data_agendamento;
+    private Integer mes_agendamento;
+
+    private String dia_agendamento;
 
     private String hora_agendamento;
 }

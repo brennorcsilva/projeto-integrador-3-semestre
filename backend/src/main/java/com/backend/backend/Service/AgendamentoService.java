@@ -7,26 +7,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@CrossOrigin(origins = "http://localhost:5173")
 public class AgendamentoService extends HelperCrud {
     @Autowired
-    AgendamentoRepo agendamentoRepo;
+    private AgendamentoRepo agendamentoRepo;
 
     //Inserir Agendamento
-    public ResponseEntity<?> adicionarAgendamento(@RequestBody Agendamento agendamento) {
+    public ResponseEntity<?> adicionarAgendamento(Agendamento agendamento) {
         try{
             //Agendamento temporario
             Agendamento agendamentoTemp = new Agendamento();
 
-            agendamentoTemp.setId_agendamento(agendamento.getId_agendamento());
+            agendamentoTemp.setId_agendamento(gerarSequencia(Agendamento.SEQUENCE_NAME));
             agendamentoTemp.setId_usuario(agendamento.getId_usuario());
             agendamentoTemp.setId_hospital(agendamento.getId_hospital());
-            agendamentoTemp.setData_agendamento(agendamento.getData_agendamento());
+            agendamentoTemp.setDia_agendamento(agendamento.getDia_agendamento());
+            agendamentoTemp.setMes_agendamento(agendamento.getMes_agendamento());
             agendamentoTemp.setHora_agendamento(agendamento.getHora_agendamento());
 
             //Salvando no Repo
@@ -63,6 +66,16 @@ public class AgendamentoService extends HelperCrud {
             }else{
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("ERRO! Agendamento não encontrado!");
             }
+        }catch(Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro!");
+        }
+    }
+
+    //Excluindo agendamento por ID
+    public ResponseEntity<?> removerAgendamentoById(long id){
+        try{
+            agendamentoRepo.deleteById(id);
+            return ResponseEntity.ok("Agendamento deletado com sucesso!");
         }catch(Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro!");
         }
