@@ -4,6 +4,7 @@ import com.backend.backend.Helpers.HelperCrud;
 import com.backend.backend.Model.Usuario;
 import com.backend.backend.Repository.UsuarioRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -50,6 +51,22 @@ public class UsuarioService extends HelperCrud {
                 return ResponseEntity.ok(usuario.get());
             }else{
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("ERRO! usuário não encontrado!");
+            }
+        }catch(Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
+    //Selecionando apenas email do usuario pelo ID
+    public ResponseEntity<?> lerEmail(@PathVariable long id) {
+        try{
+            Usuario usuario = usuarioRepo.findByEmail(id);
+
+            //Se o usuario existir...
+            if(usuario != null){
+                return ResponseEntity.ok(usuario.getEmail_usuario());
+            }else{
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("ERRo! Usuário não encontrado");
             }
         }catch(Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());

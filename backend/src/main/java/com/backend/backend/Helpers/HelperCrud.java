@@ -21,4 +21,6 @@ public class HelperCrud {
                 DatabaseSequence.class);
         return counter != null ? counter.getSeq() : 1;
     }
+
+    //Funcao para
 }

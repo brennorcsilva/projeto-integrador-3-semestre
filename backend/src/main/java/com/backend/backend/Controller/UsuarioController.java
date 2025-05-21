@@ -44,7 +44,23 @@ public class UsuarioController extends UsuarioService {
         try{
             ResponseEntity<?> usuarioTemp = lerUsuario(id);
             if(usuarioTemp.getStatusCode() == HttpStatus.OK){
-                return ResponseEntity.status(HttpStatus.ACCEPTED).body("Usuário adicionado com sucesso");
+                return ResponseEntity.status(HttpStatus.ACCEPTED).body(usuarioTemp);
+            }
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro! Faça a requisição corretamente");
+        }catch(Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
+    @Autowired
+    UsuarioService usuarioService;
+    //Lendo pelo ID e retornando um email
+    @GetMapping("/lerEmail/{id}")
+    public ResponseEntity<?> lerEmail(@PathVariable long id) {
+        try{
+            ResponseEntity<?> usuarioTemp = usuarioService.lerEmail(id);
+            if(usuarioTemp.getStatusCode() == HttpStatus.OK){
+                return ResponseEntity.status(HttpStatus.ACCEPTED).body(usuarioTemp.getBody());
             }
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro! Faça a requisição corretamente");
         }catch(Exception e){

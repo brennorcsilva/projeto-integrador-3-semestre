@@ -61,7 +61,7 @@ public class HospitalController extends HelperCrud {
             ResponseEntity<?> hospitalTemp = hospitalService.lerHospital(id);
 
             if(hospitalTemp.getStatusCode() == HttpStatus.OK){
-                return ResponseEntity.status(HttpStatus.ACCEPTED).body("Hospital cadastrado com sucesso!");
+                return ResponseEntity.status(HttpStatus.ACCEPTED).body(hospitalTemp.getBody());
             }
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro! Faça a requisição corretamente");
 
