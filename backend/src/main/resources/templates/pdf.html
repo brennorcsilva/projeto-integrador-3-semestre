@@ -1,11 +1,377 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title></title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap');
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .certificate-container {
+            width: 800px;
+            background-color: #fff;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .certificate-border {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 2px solid #e74c3c;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .blood-drop {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background-color: rgba(231, 76, 60, 0.03);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            transform: rotate(45deg);
+            top: -100px;
+            right: -100px;
+            z-index: 0;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            background-color: #e74c3c;
+            color: white;
+            font-weight: bold;
+            font-size: 24px;
+        }
+
+        .organization-info h1 {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            color: #e74c3c;
+        }
+
+        .organization-info p {
+            margin: 5px 0 0;
+            font-size: 14px;
+            color: #7f8c8d;
+        }
+
+        .certificate-number {
+            text-align: right;
+            font-size: 14px;
+            color: #7f8c8d;
+        }
+
+        .title {
+            text-align: center;
+            margin: 40px 0 30px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .title h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #e74c3c;
+            margin: 0;
+            padding: 10px 0;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 18px;
+            color: #7f8c8d;
+            margin-bottom: 40px;
+            font-style: italic;
+            position: relative;
+            z-index: 2;
+        }
+
+        .donor-info {
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .info-row {
+            display: flex;
+            margin-bottom: 15px;
+        }
+
+        .info-label {
+            width: 150px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .info-value {
+            flex: 1;
+            border-bottom: 1px dotted #bdc3c7;
+            padding-bottom: 5px;
+        }
+
+        .donation-details {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+            position: relative;
+            z-index: 2;
+            min-height: 90px;
+        }
+
+        .detail-box {
+            width: 23%;
+            max-width: 200px;
+            padding: 15px;
+            border: 1px solid #e74c3c;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        #detail-box-1{
+            margin-right: 1rem;
+        }
+
+        .detail-label {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-bottom: 5px;
+        }
+
+        .detail-value {
+            font-size: 18px;
+            font-weight: 600;
+            color: #e74c3c;
+        }
+
+        .certificate-body {
+            margin: 30px 0;
+            text-align: center;
+            line-height: 1.6;
+            position: relative;
+            z-index: 2;
+        }
+
+        .thank-you {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .certificate-message {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        .signature-section {
+            display: flex;
+            margin-top: 50px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .signature {
+            width: 200px;
+            text-align: center;
+        }
+
+        .signature-line {
+            border-top: 1px solid #333;
+            margin-bottom: 5px;
+        }
+
+        .stamp-section {
+            width: 120px;
+            height: 120px;
+            border: 1px dashed #7f8c8d;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #7f8c8d;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            font-size: 12px;
+            color: #7f8c8d;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .blood-type-icon {
+            position: absolute;
+            bottom: 40px;
+            right: 40px;
+            width: 80px;
+            height: 80px;
+            background-color: #e74c3c;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            font-weight: bold;
+            opacity: 0.1;
+            z-index: 1;
+        }
+
+        @media print {
+            body {
+                background-color: white;
+                margin: 0;
+                padding: 0;
+            }
+
+            .certificate-container {
+                box-shadow: none;
+                width: 100%;
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 800px) {
+            .certificate-container {
+                width: 95%;
+                padding: 20px;
+            }
+
+            .detail-box {
+                width: 45%;
+                margin-bottom: 10px;
+            }
+
+            .signature-section {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .signature {
+                margin-bottom: 30px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Certificado de Conclusão</h1>
-    <p>Parabéns, você doou sangue!</p>
-</body>
+<div class="certificate-container">
+    <div class="certificate-border"></div>
+    <div class="blood-drop"></div>
+
+    <div class="header">
+        <div class="logo-section">
+            <div class="logo">H</div>
+            <div class="organization-info">
+                <h1>{{nome_hospital}}</h1>
+                <p>456 Donation Avenue, Medical District</p>
+                <p>São Paulo/SP</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="title">
+        <h2>Certificado de doação de sangue</h2>
+    </div>
+
+    <div class="subtitle">
+        Sua doação salva vidas
+    </div>
+
+    <div class="donor-info">
+        <div class="info-row">
+            <div class="info-label">Nome do doador:</div>
+            <div class="info-value">{{nome_usuario}}</div>
+        </div>
+        <div class="info-row">
+            <div class="info-label">Email do doador:</div>
+            <div class="info-value">{{email_usuario}}</div>
+        </div>
+        <div class="info-row">
+            <div class="info-label">Endereço:</div>
+            <div class="info-value">789 Donor Street, City, State 12345</div>
+        </div>
+    </div>
+
+    <div class="donation-details">
+        <div class="detail-box" id="detail-box-1">
+            <div class="detail-label">Tipo Sanguíneo</div>
+            <div class="detail-value">O+</div>
+        </div>
+        <div class="detail-box">
+            <div class="detail-label">Dia da doação</div>
+            <div class="detail-value">May 21, 2025</div>
+        </div>
+    </div>
+
+    <div class="certificate-body">
+        <div class="thank-you">Obrigado pelo seu presente que salva vidas!</div>
+        <div class="certificate-message">
+            Este certificado reconhece sua generosa doação de sangue. Sua contribuição pode salvar até três vidas e é profundamente apreciada por nossa comunidade. Seu ato altruísta de bondade faz uma diferença significativa na vida dos pacientes que precisam.
+        </div>
+    </div>
+
+    <div class="signature-section">
+        <div class="signature">
+            <div class="signature-line"></div>
+            <div>Horizon</div>
+            <div style="font-size: 14px; color: #7f8c8d;">Projeto Integrador - FATEC Diadema</div>
+        </div>
+
+        <div class="stamp-section">
+            Official Stamp
+        </div>
+    </div>
+
+    <div class="blood-type-icon">O+</div>
+
+    <div class="footer">
+        <p>Este certificado confirma que o indivíduo acima mencionado doou sangue com sucesso utilizando o nosso sistema.</p>
+        <p>Para qualquer dúvida, entre em contato conosco pelo e-mail horizon@gmail.com.</p>
+    </div>
+</div>
 </html>
