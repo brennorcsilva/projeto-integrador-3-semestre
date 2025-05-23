@@ -69,6 +69,22 @@ public class HospitalService extends HelperCrud {
         }
     }
 
+    //Lendo hospital pelo ID e retornando apenas o email
+    public ResponseEntity<?> lerNomeHospital(@PathVariable long id){
+        try{
+            Hospital hospital = hospitalRepo.findByNome(id);
+
+            //Se o usuario existir...
+            if(hospital != null){
+                return ResponseEntity.ok(hospital.getNome_hospital());
+            }else{
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("ERRO! Hospital não encontrado");
+            }
+        }catch(Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
     //Removendo um hospital pelo ID
     public ResponseEntity<?> removerHospital(@PathVariable long id){
         try{

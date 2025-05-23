@@ -95,8 +95,7 @@ const Header = () =>{
     return(
         <header>
             <nav>
-                <img src={ logo } alt="logo projeto PI"/>
-
+              <Link to="/"><img src={ logo } alt="logo projeto PI"/></Link>
                 <div className='hamburguer'>
                     <div className='linha1'></div>
                     <div className='linha2'></div>

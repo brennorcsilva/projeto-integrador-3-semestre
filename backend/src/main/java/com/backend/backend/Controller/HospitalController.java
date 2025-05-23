@@ -70,6 +70,21 @@ public class HospitalController extends HelperCrud {
         }
     }
 
+    //Lendo hospital pelo ID e retornando apenas o email
+    @GetMapping("/lerNomeHospital/{id}")
+    public ResponseEntity<?> lerNomeHospital(@PathVariable long id){
+        try{
+            ResponseEntity<?> hospitalTemp = hospitalService.lerNomeHospital(id);
+
+            if(hospitalTemp.getStatusCode().equals(HttpStatus.OK)){
+                return ResponseEntity.status(HttpStatus.ACCEPTED).body(hospitalTemp.getBody());
+            }
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro! Faça a requisição corretamente");
+        }catch(Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
     //Removendo um hospital pelo ID
     @DeleteMapping("/removerHospital/{id}")
     public ResponseEntity<?> removerHospital(@PathVariable long id){

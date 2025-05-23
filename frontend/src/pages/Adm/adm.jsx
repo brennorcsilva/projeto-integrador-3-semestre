@@ -39,6 +39,15 @@ const Tabela = () =>{
   //Estado de agendamentos
   const [ agendamentos, setAgendamentos ] = useState([])
 
+  //Estados de infos importantes que serão utilizadas - id_usuario, id_hospital
+  const [ ids, setIds ] = useState([])
+
+  //Entidade email_usuario e nome_hospital
+  const [ email, setEmail ] = useState([])
+
+  const [ hospital, setHospital ] = useState([])
+
+
   //Estado de tipos sanguineos
   const [ tiposSanguineos, setTiposSanguineos ] = useState([
     { "id": 1, "tipo": "A+" },{ "id": 2, "tipo": "A-" },
@@ -60,20 +69,64 @@ const Tabela = () =>{
       //Se existir...
       if(res.data){
         setAgendamentos(res.data)
+
+        res.data.map((data) => (
+          setIds(prev => [...prev, {id_usuario: data.id_usuario, id_hospital: data.id_hospital}])
+        ))
       }
     }
 
     fetchData()
   }, [])
 
+  //Pegando os id_usuario e dando o get 
   useEffect(() =>{
-    console.log(sangueSelecionado)
-  }, [sangueSelecionado])
+    const fetchData = async() =>{
+      var res;
 
+      if(ids.length === 0){
+        return;
+      }else{
+        ids.map(async(dado) => {
+          res = await axios.get(`http://localhost:8080/lerEmail/${dado.id_usuario}`)
+          setEmail(prev => [...prev, res.data])
+        })
+      }
+
+    }
+    fetchData()
+  }, [ids])
+
+  //Pegando os id_email e dando o get
+  useEffect(() =>{
+    const fetchData = async() =>{
+      var res;
+      if(ids.length === 0){
+        return;
+      }else{
+        ids.map(async(dado) => {
+          res = await axios.get(`http://localhost:8080/lerNomeHospital/${dado.id_hospital}`)
+          setHospital(prev => [...prev, res.data])
+        })
+      }}
+
+      fetchData()
+  }, [ids])
+
+  //Imprimir dados
   const imprimir = (dadosAgendamento, e) =>{
     setSangueSelecionado(e)
   }
 
+  //Exclusao de um agendamento
+  const deletarAgendamento = async(dados) =>{
+    try{
+      await axios.delete(`http://localhost:8080/removerAgendamentos/${dados.id_agendamento}`)
+      location.reload()
+    }catch(e){
+      console.log(e)
+    }
+  }
 
   //Componente Select
   const TipoSanguineo = (dadosAgendamento) =>{
@@ -86,7 +139,6 @@ const Tabela = () =>{
             { tiposSanguineos.map((tipoSanguineo) => (<>
               <SelectItem key={tipoSanguineo.id} value={tipoSanguineo.tipo}>{tipoSanguineo.tipo}</SelectItem>
           </>)) }
-          
         </SelectContent>
       </Select>
     )
@@ -98,7 +150,7 @@ const Tabela = () =>{
         <AlertDialog>
             { cancelarAgendamento ? (<>
               <AlertDialogTrigger asChild>
-              <Button variant="outline">Excluir</Button>
+              <Button className="bg-(--cor-sangue) hover:bg-red-400 cursor-pointer">Excluir</Button>
               </AlertDialogTrigger>
               <AlertDialogContent>
             <AlertDialogHeader>
@@ -109,12 +161,12 @@ const Tabela = () =>{
             </AlertDialogHeader>
             <AlertDialogFooter>
             <AlertDialogCancel className="cursor-pointer">Cancelar</AlertDialogCancel>
-            <AlertDialogAction className="cursor-pointer">Deletar</AlertDialogAction>
+            <AlertDialogAction className="cursor-pointer bg-(--cor-sangue) hover:bg-red-400" onClick={() => deletarAgendamento(dadosAgendamento)}>Deletar</AlertDialogAction>
           </AlertDialogFooter>
           </AlertDialogContent>
         </>) : (<>
           <AlertDialogTrigger asChild>
-              <Button variant="outline">Imprimir</Button>
+              <Button className="cursor-pointer bg-indigo-500 hover:bg-indigo-300">Imprimir</Button>
               </AlertDialogTrigger>
               <AlertDialogContent>
             <AlertDialogHeader>
@@ -125,7 +177,7 @@ const Tabela = () =>{
                   <TipoSanguineo dadosAgendamento={dadosAgendamento}/>
             </AlertDialogHeader>
             <AlertDialogFooter>
-            <AlertDialogAction className="cursor-pointer">Cancelar</AlertDialogAction>
+            <AlertDialogAction className="cursor-pointer bg-stone-600">Cancelar</AlertDialogAction>
           </AlertDialogFooter>
           </AlertDialogContent>
         </>  
@@ -140,25 +192,25 @@ const Tabela = () =>{
           <TableHeader>
             <TableRow>
             <TableHead className="w-[100px]">ID_agendamento</TableHead>
-            <TableHead>Email_usuario</TableHead>
-            <TableHead>Nome_hospital</TableHead>
-            <TableHead>Dia_agendamento</TableHead>
-            <TableHead>Mes_agendamento</TableHead>
-            <TableHead>Hora_agendamento</TableHead>
-            <TableHead className="text-right">Ação</TableHead>
+            <TableHead>Email do Doador</TableHead>
+            <TableHead>Nome do Hospital</TableHead>
+            <TableHead>Dia do Agendamento</TableHead>
+            <TableHead>Mes do agendamento</TableHead>
+            <TableHead>Hora do agendamento</TableHead>
+            <TableHead className="text-right">Ações</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {agendamentos.map((agendamento) => (
+          {agendamentos.map((agendamento, index) => (
             <TableRow key={agendamento.id_agendamento}>
-              <TableCell className="font-medium border-2">{agendamento.id_agendamento}</TableCell>
-              <TableCell className="border-2">{agendamento.id_usuario}</TableCell>
-              <TableCell className="text-right border-2">{agendamento.id_hospital}</TableCell>
-              <TableCell className="text-right border-2">{agendamento.dia_agendamento}</TableCell>
-              <TableCell className="text-right border-2">{agendamento.mes_agendamento}</TableCell>
-              <TableCell className="text-right border-2">{agendamento.hora_agendamento}</TableCell>
+              <TableCell className="font-medium border-2 text-center">{agendamento.id_agendamento}</TableCell>
+              <TableCell className="border-2 text-center">{email[index]}</TableCell>
+              <TableCell className="text-center border-2">{hospital[index]}</TableCell>
+              <TableCell className="text-center border-2">{agendamento.dia_agendamento}</TableCell>
+              <TableCell className="text-center border-2">{agendamento.mes_agendamento}</TableCell>
+              <TableCell className="text-center border-2">{agendamento.hora_agendamento}</TableCell>
               <TableCell className="text-center border-2"><Alerta dadosAgendamento={agendamento} className="cursor-pointer"/></TableCell>
-              <TableCell className="text-center border-2"><Alerta dadosAgendamento={null} cancelarAgendamento={true} className="cursor-pointer"/></TableCell>
+              <TableCell className="text-center border-2"><Alerta dadosAgendamento={agendamento} cancelarAgendamento={true} className="cursor-pointer"/></TableCell>
             </TableRow>
           ))}
         </TableBody>

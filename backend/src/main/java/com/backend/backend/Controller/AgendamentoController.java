@@ -57,7 +57,7 @@ public class AgendamentoController{
 
     //Ler agendamentos por ID
     @GetMapping("/lerAgendamento/{id}")
-    public ResponseEntity<?> lerAgendamentoById(long id){
+    public ResponseEntity<?> lerAgendamentoById(@PathVariable long id){
         try{
             ResponseEntity<?> agendamentosTemp = agendamentoService.lerAgendamentoById(id);
 
@@ -74,7 +74,7 @@ public class AgendamentoController{
 
     //Deletando Agendamentos por ID
     @DeleteMapping("/removerAgendamentos/{id}")
-    public ResponseEntity<?> removerAgendamentoById(long id){
+    public ResponseEntity<?> removerAgendamentoById(@PathVariable long id){
         try{
             ResponseEntity<?> agendamentosTemp = agendamentoService.removerAgendamentoById(id);
 
