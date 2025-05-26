@@ -4,6 +4,7 @@
 - [Descrição](#descrição)
 - [Instalação](#instalação)
 - [Uso](#uso)
+- [Documentação](#documentação)
 
 # Descrição
 Desenvolvimento de um sistema web para facilitar a conexão entre doadores de sangue e pontos de coleta em São Paulo
@@ -28,3 +29,8 @@ Desenvolvimento de um sistema web para facilitar a conexão entre doadores de sa
 - Após a instalação, para rodar a aplicação utilize o comando 'npm run dev'. Lembre-se: Para executar o projeto, é necessário primeiro instalar as dependências com 'npm i' ou 'npm install'.
 
 - Após isso, basta acessar o projeto na 'localhost:5173'.
+
+## Documentação
+- A introdução do Cumento de Arquitetura de Software fornece uma visão geral do documento inteiro. Ela abrange a finalidade, o escopo, as definições, os acrônimos, as abreviações, as referências e a visão geral do Documento de Arquitetura de Software.
+- Este documento oferece uma visão geral arquitetural abrangente do sistema, utilizando diversas visões arquiteturais para representar diferentes aspectos do sistema. O objetivo deste documento é capturar e comunicar as decisções arquiteturais significativas tomadas em relação ao sistema.
+- Esta seção define o papel ou finalidade do Documento de Arquitetura de Software na documentação do projeto como um todo, e descreve brevemente a estrutura do documento. O público-alvo específico do doucmento é identificado, juntamente com uma indicação de como se espera que ele utilize o documento.
