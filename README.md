@@ -34,3 +34,6 @@ Desenvolvimento de um sistema web para facilitar a conexão entre doadores de sa
 - A introdução do Cumento de Arquitetura de Software fornece uma visão geral do documento inteiro. Ela abrange a finalidade, o escopo, as definições, os acrônimos, as abreviações, as referências e a visão geral do Documento de Arquitetura de Software.
 - Este documento oferece uma visão geral arquitetural abrangente do sistema, utilizando diversas visões arquiteturais para representar diferentes aspectos do sistema. O objetivo deste documento é capturar e comunicar as decisções arquiteturais significativas tomadas em relação ao sistema.
 - Esta seção define o papel ou finalidade do Documento de Arquitetura de Software na documentação do projeto como um todo, e descreve brevemente a estrutura do documento. O público-alvo específico do doucmento é identificado, juntamente com uma indicação de como se espera que ele utilize o documento.
+
+## Link para acesso a documentação
+- [Documentação] (https://fatecspgov-my.sharepoint.com/:w:/r/personal/mayanderson_santos_fatec_sp_gov_br/_layouts/15/Doc.aspx?sourcedoc=%7B9FF34952-DA1E-4ED7-A3CB-BCADC210D2A8%7D&file=Documentac%CC%A7a%CC%83oArquitetura%20-%20Parte%202.docx&action=default&mobileredirect=true&DefaultItemOpen=1)
