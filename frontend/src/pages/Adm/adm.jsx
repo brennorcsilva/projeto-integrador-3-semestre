@@ -114,8 +114,14 @@ const Tabela = () =>{
   }, [ids])
 
   //Imprimir dados
-  const imprimir = (dadosAgendamento, e) =>{
-    setSangueSelecionado(e)
+  const imprimir = async(dadosAgendamento, e) =>{
+    try{
+      setSangueSelecionado(e)
+      const req = "http://localhost:8080/gerarPdf/matheus/matheus@gmail.com"
+      window.open(req)
+    }catch(e){
+      console.log(e)
+    }
   }
 
   //Exclusao de um agendamento
