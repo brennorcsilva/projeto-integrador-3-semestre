@@ -1,7 +1,6 @@
 import React from 'react';
 import '../../assets/css/formularioAgendamento.css'
 import LocaisDoacao from '../LocaisDoacao/locaisDoacao';
-import Botao from '../Botao/botao'
 import Horarios from '../Horarios/horarios';
 import { Calendar } from "@/components/ui/calendar"
 import { useState, useEffect } from 'react';

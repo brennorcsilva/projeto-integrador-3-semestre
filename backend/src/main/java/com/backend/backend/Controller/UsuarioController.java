@@ -68,6 +68,17 @@ public class UsuarioController extends UsuarioService {
         }
     }
 
+    //Lendo um email e retornando um usuario
+    @GetMapping("/lerUsuarioEmail/{email}/{senha}")
+    public ResponseEntity<?> lerUsuarioEmail(@PathVariable String email, @PathVariable String senha) {
+            ResponseEntity<?> usuarioTemp = usuarioService.lerUsuarioEmail(email, senha);
+
+            if(usuarioTemp.getStatusCode() == HttpStatus.OK){
+                return ResponseEntity.status(HttpStatus.ACCEPTED).body(usuarioTemp.getBody());
+            }
+            return ResponseEntity.status(usuarioTemp.getStatusCode()).body(usuarioTemp.getBody());
+    }
+
     //Atualizando um usuario pelo ID
     @PatchMapping("/atualizarUsuario/{id}")
         public ResponseEntity<?> atualizarUsuario(@PathVariable Long id, @RequestBody Usuario usuarioAtualizado){

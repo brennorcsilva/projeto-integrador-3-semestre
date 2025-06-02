@@ -57,6 +57,25 @@ public class UsuarioService extends HelperCrud {
         }
     }
 
+    //Lendo um usuario apenas pelo email
+    public ResponseEntity<?> lerUsuarioEmail(@PathVariable String email, @PathVariable String senha) {
+        try{
+            Usuario usuario = usuarioRepo.findByEmail(email);
+
+            if(usuario != null){
+                if(usuario.getSenha_usuario().equals(senha)){
+                    return ResponseEntity.ok(usuario);
+                }
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro! Email e/ou senha não coincidem!");
+
+            }else{
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro! Usuário não encontrado");
+            }
+        }catch(Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
     //Selecionando apenas email do usuario pelo ID
     public ResponseEntity<?> lerEmail(@PathVariable long id) {
         try{

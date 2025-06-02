@@ -7,6 +7,7 @@ import Cadastro from './pages/Cadastro/cadastro'
 import Agendamento from './pages/Agendamento/agendamento'
 import Suporte from './pages/Suporte/suporte'
 import Adm from './pages/Adm/adm'
+import Login from './pages/Login/login'
 import NotFound from './pages/NotFound/notFound'
 
 createRoot(document.getElementById('root')).render(
@@ -18,6 +19,7 @@ createRoot(document.getElementById('root')).render(
             <Route path="agendamento" element={ <Agendamento/> }/>
             <Route path="suporte" element={ <Suporte/> }/>
             <Route path="adm" element= { <Adm/> }/>
+            <Route path="login" element= { <Login/> }/>
             <Route path="*" element= { <NotFound/> }/>
         </Routes>
     </BrowserRouter>

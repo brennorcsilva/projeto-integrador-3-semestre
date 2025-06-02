@@ -190,7 +190,7 @@ const Formulario = ({ formCadastro }) =>{
                 <Link to="/login" className="text-white font-bold text-center botao-entrar">Entrar</Link>
             </div>
 
-            <div className="container-cadastro flex flex-col align-center">
+            <div className="container-cadastro flex flex-col align-center justify-center">
                     <h1 className="text-(length:--tamanho-titulo) text-(--cor-sangue) font-bold text-center">Crie sua conta</h1>
                     <h4 className="text-md text-[#C6C6C6] text-center font-semibold">Preencha com seus dados</h4>
                         <form action="#" method="POST" className="flex flex-wrap form gap-4 mt-2 mx-auto">
