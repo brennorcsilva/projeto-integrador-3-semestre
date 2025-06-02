@@ -10,11 +10,13 @@ const Suporte = () =>{
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 1.3 }}>
+            transition={{ duration: 1.3 }}
+            className="flex flex-col min-h-screen"
+            >
                 
                 <Header/>
 
-                <section className="section-contato p-(--espacamento) relative flex justify-around">
+                <section className="section-contato p-(--espacamento) relative flex justify-around flex-1 mt-6">
                     <Contato/>
                 </section>
 

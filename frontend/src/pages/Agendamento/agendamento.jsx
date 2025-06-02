@@ -8,7 +8,7 @@ const Agendamento = () =>{
         <Header/>
         <FormularioAgendamento mostrarTexto={ false }/>
 
-        <Footer/>
+        <Footer fixed={"fixed"} bottom={"bottom-0"} width={"w-full"}/>
         </>
     )
 }

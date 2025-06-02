@@ -10,7 +10,9 @@ const Cadastro = () =>{
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 1.3 }}>
+            transition={{ duration: 1.3 }}
+            className="flex flex-col min-h-screen"
+            >
                 <Header/>
                 <ChatBot/>
                 <Formulario formCadastro = { true }/>

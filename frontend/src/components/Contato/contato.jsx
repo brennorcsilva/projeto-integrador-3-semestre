@@ -37,7 +37,7 @@ const Contato = () =>{
 
         <div className="container-dropdown-contato flex flex-col gap-y-4">
             <DropdownContato titulo="Como funciona o agendamento?" texto="O agendamento é 100% seguro e eficiente! Primeiro você escolhe a unidade mais próxima, passa pelo nosso sistema de triagem eletrônica, escolha a data disponível e pronto! :)"/>
-            <DropdownContato titulo="Tenho que pagar algo?" texto="lorem ipsum dolor met color"/>
+            <DropdownContato titulo="Eu tenho que pagar algo?" texto="lorem ipsum dolor met color"/>
             <DropdownContato titulo="Não consigo localizar minhas doações" texto="lorem ipsum dolor met color"/>
             <DropdownContato titulo="Não consegui localizar nenhum local para doação perto de mim" texto="lorem ipsum dolor met color"/>
             <DropdownContato titulo="Como cadastro meu Hospital / Posto de coleta?" texto="lorem ipsum dolor met color"/>

@@ -180,7 +180,7 @@ const Formulario = ({ formCadastro }) =>{
     }
 
     return(
-        <section className="formulario flex align-center">
+        <section className="formulario flex align-center flex-1">
             <div className="container-login bg-(--cor-fundo) flex flex-col justify-center align-center w-1/3">
                 <img src={ logo } alt="logo do site" className="logo-login"/>  
                 <h1 className="text-white mb-8 mt-2 text-(length:--tamanho-texto) font-bold text-center">Bem-vindo novamente!</h1>
