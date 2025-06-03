@@ -37,12 +37,23 @@ const Login = () =>{
         e.preventDefault()
 
         if(usuario.email === '' || usuario.senha === ''){
-            return alert("NAO OK!")
+            setMensagemAviso({
+                titulo: "Erro ao tentar logar!",
+                texto: "Preencha as informações corretamente!",
+                style: "text-red-600"
+            })
+            return setIsAvisoOpen(true)
         }
 
         try{
             const res = await axios.get(`http://localhost:8080/lerUsuarioEmail/${usuario.email}/${usuario.senha}`)
             localStorage.setItem("usuario", JSON.stringify(res.data))
+            setMensagemAviso({
+                titulo: "Sucesso ao logar!",
+                texto: `Seja bem vindo novamente ${JSON.stringify(res.data.nome_usuario)}`,
+                style: "text-green-600"
+            })
+            setIsAvisoOpen(true)
         }catch(e){
             alert("Email e/ou senha não coincidem! tente novamente")
             setUsuario({
@@ -63,7 +74,7 @@ const Login = () =>{
         if(isLogged){
             setMensagemAviso({
                 titulo: "Usuário já logado!",
-                texto: `Seja bem vindo novamente ${JSON.parse(localStorage.getItem("usuario")).nome_usuario}! Te redirecionnado para a página inicial`,
+                texto: `Seja bem vindo novamente ${JSON.parse(localStorage.getItem("usuario")).nome_usuario}! Te redirecionando para a página inicial`,
                 style: "text-green-600"
             })
             return setIsAvisoOpen(true)
@@ -79,14 +90,15 @@ const Login = () =>{
                 className="flex flex-col min-h-screen"
             >
                 <Header/>
-                    <section className="rounded-lg w-full max-w-7xl my-4 mx-auto shadow-[0 0 10px #9c9999] flex-1">
-                        <div>
+                    <section className="w-full max-w-7xl my-8 mx-auto flex-1 flex items-center w-full">
+                        <div className="rounded-lg shadow-[0_0_10px_#9C9999] flex flex-col items-center justify-center py-8 px-2 max-w-lg mx-auto w-full bg-[#F5F5F5]">
                             <img src={logo} alt="logo projeto horizon"/>
-                            <form action="#" method="POST">
-                                <input type="email" name="email" id="email" placeholder="lorem.ipsum@gmail.com" onChange={handleForm} value={usuario.email}/>
-                                <input type="password" name="senha" id="senha" placeholder="********" onChange={handleForm} value={usuario.senha}/>
+                            <h1 className="text-2xl text-(--cor-sangue) mb-4">Entre na sua conta</h1>
+                            <form action="#" method="POST" className="flex flex-col gap-y-4 justify-center items-center">
+                                <input type="email" name="email" id="email" placeholder="lorem.ipsum@gmail.com" onChange={handleForm} value={usuario.email} className="rounded-2xl px-3 py-1.5 text-md bg-[#EEEDED] border-2 border-[-#C6C6C6] text-black font-semibold"/>
+                                <input type="password" name="senha" id="senha" placeholder="********" onChange={handleForm} value={usuario.senha} className="rounded-2xl px-3 py-1.5 text-md bg-[#EEEDED] border-2 border-[-#C6C6C6] text-black font-semibold"/>
 
-                                <input type="submit" value="Logar" onClick={handleSubmit}/>
+                                <input type="submit" value="Entrar" onClick={handleSubmit} className="cursor-pointer bg-(--cor-sangue) rounded-4xl py-2 px-4 w-36 text-white transition duration-500 hover:-translate-y-2 hover:scale-110"/>
                             </form>
                         </div>
                     </section>
