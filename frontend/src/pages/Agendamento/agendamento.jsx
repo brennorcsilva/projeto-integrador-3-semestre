@@ -6,6 +6,7 @@ import Footer from '../../components/Footer/footer';
 const Agendamento = () =>{
     return(<>
         <Header/>
+        {/*Triagem de doação de sangue*/ }
         <FormularioAgendamento mostrarTexto={ false }/>
 
         <Footer fixed={"fixed"} bottom={"bottom-0"} width={"w-full"}/>

@@ -114,7 +114,7 @@ const LocaisDoacao = ({ mostrarTexto }) =>{
             <section className="locais-doacao flex items-start justify-evenly bg-(--cor-fundo-azul) p-(--espacamento)">
             <div className="container-texto flex align-center justify-center flex-col gap-y-6 mt-8">
                     <h1 className="text-white text-(length:--tamanho-titulo) font-bold text-center mt-2">Locais para Doação</h1>
-                    <p className="text-white text-(length:--tamanho-texto) texto-doacao text-center">A nossa missão é otimizar e agilizar todo o processo de doação de sangue e plaquetas! Ao visitar nosso site, você pode encontrar os hospitais e postos de coleta mais próximos que utilizam o software CONEXSP. Basta inserir seu endereço ao lado e verificar as opções disponíveis. Juntos, salvaremos vidas :)</p>
+                    <p className="text-white text-(length:--tamanho-texto) texto-doacao text-center">A nossa missão é otimizar e agilizar todo o processo de doação de sangue e plaquetas! Ao visitar nosso site, você pode encontrar os hospitais e postos de coleta mais próximos que utilizam o software CONEXSP. Basta inserir seu endereço ao lado e verificar as opções disponíveis. Juntos, salvaremos vidas.</p>
                 </div>
 
                 <div className="container-img w-full flex align-center justify-center flex-col relative gap-y-4 mt-12 mb-2">

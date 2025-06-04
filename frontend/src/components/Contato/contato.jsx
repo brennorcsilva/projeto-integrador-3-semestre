@@ -5,7 +5,7 @@ import telefoneUrl from '../../assets/img/telefone.svg'
 import redesUrl from '../../assets/img/redes-sociais.svg'
 import instagramVermelho from '../../assets/img/instagram-vermelho.svg'
 import facebookVermelho from '../../assets/img/facebook-vermelho.svg'
-import twitterVermelho from '../../assets/img/instagram-vermelho.svg'
+import twitterVermelho from '../../assets/img/twitter-vermelho.svg'
 import { useState } from "react";
 
 const Contato = () =>{
@@ -36,7 +36,7 @@ const Contato = () =>{
         </div>
 
         <div className="container-dropdown-contato flex flex-col gap-y-4">
-            <DropdownContato titulo="Como funciona o agendamento?" texto="O agendamento é 100% seguro e eficiente! Primeiro você escolhe a unidade mais próxima, passa pelo nosso sistema de triagem eletrônica, escolha a data disponível e pronto! :)"/>
+            <DropdownContato titulo="Como funciona o agendamento?" texto="O agendamento é 100% seguro e eficiente! Primeiro você escolhe a unidade mais próxima, passa pelo nosso sistema de triagem eletrônica, escolha a data disponível e pronto!"/>
             <DropdownContato titulo="Eu tenho que pagar algo?" texto="lorem ipsum dolor met color"/>
             <DropdownContato titulo="Não consigo localizar minhas doações" texto="lorem ipsum dolor met color"/>
             <DropdownContato titulo="Não consegui localizar nenhum local para doação perto de mim" texto="lorem ipsum dolor met color"/>
