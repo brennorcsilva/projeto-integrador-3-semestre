@@ -6,7 +6,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import Alerta from '../Alerta/alerta'
 
-const TriagemDoacao = () =>{
+const TriagemDoacao = ({handleSubmit}) =>{
     //Estados a serem manipulados
     const [ progresso, setProgresso ] = useState({
         titulo: 0,
@@ -61,7 +61,8 @@ const TriagemDoacao = () =>{
     const [ mensagemAviso, setMensagemAviso ] = useState({
         titulo: "",
         texto: "",
-        style: ""
+        style: "",
+        handleSubmit: handleSubmit
     })
 
     //Funções
@@ -144,17 +145,25 @@ const TriagemDoacao = () =>{
             })
             return setIsOpen(true)
         }
-        
-        setMensagemAviso({
-            titulo: "Sucesso! Usuário passível de doação",
-            texto: "Parabéns! Você é elegível para doação de sangue! Por favor, continue para o agendamento",
-            style: "text-green-600"
-        })
-        return setIsOpen(true)
+            setMensagemAviso({
+                titulo: "Sucesso! Usuário passível de doação",
+                texto: "Parabéns! Você é elegível para doação de sangue! Por favor, continue para o agendamento",
+                style: "text-green-600",
+            })
+        setIsOpen(true)
+
+        setTimeout(() =>{ 
+                setMensagemAviso({
+                    titulo: "Sucesso! Usuário passível de doação",
+                    texto: "Parabéns! Você é elegível para doação de sangue! Por favor, continue para o agendamento",
+                    style: "text-green-600",
+                    handleSubmit: handleSubmit()
+                })
+        }, 3000)
     }
 
     return(
-        <section>
+        <section className="flex justify-center items-center mt-8">
             <div className="w-full max-w-2xl mx-auto rounded-lg shadow-[0_0_10px_#9C9999] px-6 py-4">
                 
                 <div className="flex flex-col">

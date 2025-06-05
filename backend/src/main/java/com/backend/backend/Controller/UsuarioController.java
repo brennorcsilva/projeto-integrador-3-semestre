@@ -76,7 +76,7 @@ public class UsuarioController extends UsuarioService {
             if(usuarioTemp.getStatusCode() == HttpStatus.OK){
                 return ResponseEntity.status(HttpStatus.ACCEPTED).body(usuarioTemp.getBody());
             }
-            return ResponseEntity.status(usuarioTemp.getStatusCode()).body(usuarioTemp.getBody());
+            return ResponseEntity.status(usuarioTemp.getStatusCode()).body(usuarioTemp.getBody());  
     }
 
     //Atualizando um usuario pelo ID
