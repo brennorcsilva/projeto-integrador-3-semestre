@@ -223,14 +223,6 @@
         .stamp-section {
             width: 120px;
             height: 120px;
-            border: 1px dashed #7f8c8d;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #7f8c8d;
-            font-size: 12px;
-            text-align: center;
         }
 
         .footer {
@@ -308,14 +300,14 @@
             <div class="logo">H</div>
             <div class="organization-info">
                 <h1>{{nome_hospital}}</h1>
-                <p>456 Donation Avenue, Medical District</p>
+                <p>{{endereco_hospital}}</p>
                 <p>São Paulo/SP</p>
             </div>
         </div>
     </div>
 
     <div class="title">
-        <h2>Certificado de doação de sangue</h2>
+        <h2>Declaração de doação de sangue</h2>
     </div>
 
     <div class="subtitle">
@@ -333,18 +325,18 @@
         </div>
         <div class="info-row">
             <div class="info-label">Endereço:</div>
-            <div class="info-value">789 Donor Street, City, State 12345</div>
+            <div class="info-value">{{endereco_hospital}}</div>
         </div>
     </div>
 
     <div class="donation-details">
         <div class="detail-box" id="detail-box-1">
             <div class="detail-label">Tipo Sanguíneo</div>
-            <div class="detail-value">O+</div>
+            <div class="detail-value">{{tipo_sanguineo}}</div>
         </div>
         <div class="detail-box">
             <div class="detail-label">Dia da doação</div>
-            <div class="detail-value">May 21, 2025</div>
+            <div class="detail-value">{{dia_doacao}}/{{mes_doacao}}, 2025</div>
         </div>
     </div>
 

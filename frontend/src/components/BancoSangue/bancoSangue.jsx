@@ -1,6 +1,7 @@
 import '../../assets/css/bancoSangue.css'
 import { useState, useEffect } from 'react'
 import Botao from '../Botao/botao'
+import { Link } from 'react-router-dom'
 
 const BancoSangue = () =>{
     const [ isActive, setIsActive ] = useState(false)
@@ -84,7 +85,7 @@ const BancoSangue = () =>{
             </section>
 
             <div className="container-botao flex justify-center items-center">
-                <Botao texto="Agendar Doação"/>
+                <Link to="/agendamento"><Botao texto="Agendar Doação"/></Link>
             </div>
             </>
         )

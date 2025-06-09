@@ -9,7 +9,6 @@ import Suporte from './pages/Suporte/suporte'
 import Adm from './pages/Adm/adm'
 import Login from './pages/Login/login'
 import NotFound from './pages/NotFound/notFound'
-import Teste from './pages/Teste/teste'
 
 createRoot(document.getElementById('root')).render(
     <BrowserRouter>
@@ -22,7 +21,6 @@ createRoot(document.getElementById('root')).render(
             <Route path="adm" element= { <Adm/> }/>
             <Route path="login" element= { <Login/> }/>
             <Route path="*" element= { <NotFound/> }/>
-            <Route path="teste" element= {<Teste/>}/>
         </Routes>
     </BrowserRouter>
 )

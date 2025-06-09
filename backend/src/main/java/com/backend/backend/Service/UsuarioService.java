@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -83,7 +85,10 @@ public class UsuarioService extends HelperCrud {
 
             //Se o usuario existir...
             if(usuario != null){
-                return ResponseEntity.ok(usuario.getEmail_usuario());
+                List <String> usuarioTemp = new ArrayList<>();
+                usuarioTemp.add(usuario.getEmail_usuario());
+                usuarioTemp.add(usuario.getNome_usuario());
+                return ResponseEntity.ok(usuarioTemp);
             }else{
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("ERRo! Usuário não encontrado");
             }

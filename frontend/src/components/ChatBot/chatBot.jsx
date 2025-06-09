@@ -62,7 +62,7 @@ const ChatBot = () =>{
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    model: "nousresearch/deephermes-3-mistral-24b-preview:free",
+                    model: "deepseek/deepseek-r1-0528:free",
                     messages: [
                         {
                             role: "user",

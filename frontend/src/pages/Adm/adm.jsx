@@ -43,10 +43,15 @@ const Tabela = () =>{
   const [ ids, setIds ] = useState([])
 
   //Entidade email_usuario e nome_hospital
-  const [ email, setEmail ] = useState([])
+  const [ email, setEmail ] = useState([{
+    "nome": "",
+    "email": ""
+  }])
 
-  const [ hospital, setHospital ] = useState([])
-
+  const [ hospital, setHospital ] = useState([{
+    "nome": "",
+    "endereco": ""
+  }])
 
   //Estado de tipos sanguineos
   const [ tiposSanguineos, setTiposSanguineos ] = useState([
@@ -89,13 +94,17 @@ const Tabela = () =>{
       }else{
         ids.map(async(dado) => {
           res = await axios.get(`http://localhost:8080/lerEmail/${dado.id_usuario}`)
-          setEmail(prev => [...prev, res.data])
+          setEmail(prev => [...prev, {nome: res.data[0], email: res.data[1]}])
         })
       }
 
     }
     fetchData()
   }, [ids])
+
+  useEffect(() =>{
+    console.log(email)
+  }, [email])
 
   //Pegando os id_email e dando o get
   useEffect(() =>{
@@ -106,7 +115,7 @@ const Tabela = () =>{
       }else{
         ids.map(async(dado) => {
           res = await axios.get(`http://localhost:8080/lerNomeHospital/${dado.id_hospital}`)
-          setHospital(prev => [...prev, res.data])
+          setHospital(prev => [...prev, {nome: res.data[0], endereco: res.data[1]}])
         })
       }}
 
@@ -115,13 +124,18 @@ const Tabela = () =>{
 
   //Imprimir dados
   const imprimir = async(dadosAgendamento, e) =>{
+    setSangueSelecionado(e)
     try{
-      setSangueSelecionado(e)
-      const req = "http://localhost:8080/gerarPdf/matheus/matheus@gmail.com"
-      window.open(req)
+        const res_nome = await axios.get(`http://localhost:8080/lerEmail/${dadosAgendamento.dadosAgendamento.id_usuario}`)
+        const res_hospital = await axios.get(`http://localhost:8080/lerNomeHospital/${dadosAgendamento.dadosAgendamento.id_hospital}`)
+        if(res_nome.data && res_hospital.data){
+          const req = `http://localhost:8080/gerarPdf/${res_nome.data[1]}/${res_nome.data[0]}/${res_hospital.data[0]}/${res_hospital.data[1]}/${dadosAgendamento.dadosAgendamento.dia_agendamento}/${dadosAgendamento.dadosAgendamento.mes_agendamento}/${e}`
+          window.open(req)
+        }
+        else return console.log("nAO FOI ACHADO")
     }catch(e){
       console.log(e)
-    }
+    } 
   }
 
   //Exclusao de um agendamento
@@ -193,7 +207,7 @@ const Tabela = () =>{
   }
 
   return(
-    <div className="container p-(--espacamento) flex mx-auto">
+    <div className="container p-(--espacamento) flex mx-auto flex-1">
         <Table>
           <TableHeader>
             <TableRow>
@@ -210,8 +224,8 @@ const Tabela = () =>{
           {agendamentos.map((agendamento, index) => (
             <TableRow key={agendamento.id_agendamento}>
               <TableCell className="font-medium border-2 text-center">{agendamento.id_agendamento}</TableCell>
-              <TableCell className="border-2 text-center">{email[index]}</TableCell>
-              <TableCell className="text-center border-2">{hospital[index]}</TableCell>
+              <TableCell className="border-2 text-center">{ email.length <= 1 ? (<></>) : (<>{email[index + 1].nome}</>)}</TableCell>
+              <TableCell className="text-center border-2">{hospital.length <= 1 ? (<></>) : (<>{hospital[index + 1].nome}</>)}</TableCell>
               <TableCell className="text-center border-2">{agendamento.dia_agendamento}</TableCell>
               <TableCell className="text-center border-2">{agendamento.mes_agendamento}</TableCell>
               <TableCell className="text-center border-2">{agendamento.hora_agendamento}</TableCell>
@@ -232,7 +246,9 @@ const Tabela = () =>{
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 1.3 }}>
+              transition={{ duration: 1.3 }}
+              className="flex flex-col min-h-screen"
+              >
               <Header/>
               <Tabela/>
               <Footer/>

@@ -13,7 +13,7 @@ import java.io.InputStreamReader;
 public class PdfService {
 
     //Aqui irá receber o response para converter e enviar como HTML
-    public void converterPdf(HttpServletResponse response, String nome_usuario, String email_usuario) throws IOException {
+    public void converterPdf(HttpServletResponse response, String nome_usuario, String email_usuario, String nome_hospital, String endereco_hospital, String dia_doacao, String mes_doacao, String tipo_sanguineo) throws IOException {
         StringBuilder paginaHtml = new StringBuilder();
 
         //Lendo arquivo HTML
@@ -27,6 +27,11 @@ public class PdfService {
 
         String htmlFinal = paginaHtml.toString()
                 .replace("{{nome_usuario}}", nome_usuario)
+                .replace("{{nome_hospital}}", nome_hospital)
+                .replace("{{endereco_hospital}}", endereco_hospital)
+                .replace("{{dia_doacao}}", dia_doacao)
+                .replace("{{mes_doacao}}", mes_doacao)
+                .replace("{{tipo_sanguineo}}", tipo_sanguineo)
                 .replace("{{email_usuario}}", email_usuario);
 
         //Armazenando o PDF em memoria

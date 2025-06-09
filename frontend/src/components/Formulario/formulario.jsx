@@ -163,6 +163,7 @@ const Formulario = ({ formCadastro }) =>{
                     mensagem: "Cadastro realizado com sucesso!",
                     erro: false
                 })
+                location.reload()
             }catch(error){
                 console.log(error)
             }
