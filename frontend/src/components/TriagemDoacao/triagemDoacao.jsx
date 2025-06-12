@@ -183,12 +183,12 @@ const TriagemDoacao = ({handleSubmit}) =>{
                             <RadioGroup className="flex" onValueChange={(e, id) => handleChange(e, pergunta.id)}>
 
                                 <div className="flex items-center gap-x-2 mt-1">
-                                    <RadioGroupItem value="sim" id={pergunta.id}/>
+                                    <RadioGroupItem value="sim" id={pergunta.id} className="w-7 h-7"/>
                                     <Label htmlFor={pergunta.id} className="cursor-pointer">Sim</Label>
                                 </div>
 
                                 <div className="flex items-center gap-3" >
-                                    <RadioGroupItem value="não" id={pergunta.texto}/>
+                                    <RadioGroupItem value="não" id={pergunta.texto} className="w-7 h-7"/>
                                     <Label htmlFor={pergunta.texto} className="cursor-pointer">Não</Label>
                                 </div>
                             </RadioGroup>
@@ -197,9 +197,9 @@ const TriagemDoacao = ({handleSubmit}) =>{
                     ))}
                 </div>
                 
-                <div className="flex gap-x-2 justify-center mt-2 mb-4">
-                    <Checkbox id="termos" className="cursor-pointer" onCheckedChange={() => setIsChecked(!isChecked)}/>
-                    <Label htmlFor="termos" className="text-(--cor-sangue) cursor-pointer">Declaro que as respostas são verdadeiras</Label>
+                <div className="flex gap-x-2 justify-center mt-2 mb-4 items-center">
+                    <Checkbox id="termos" className="cursor-pointer w-5 h-5" onCheckedChange={() => setIsChecked(!isChecked)}/>
+                    <Label htmlFor="termos" className="text-(--cor-sangue) cursor-pointer text-md">Declaro que as respostas são verdadeiras</Label>
                 </div>
                 
                 <div className="flex justify-center items-center">
